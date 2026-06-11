@@ -1,6 +1,8 @@
 # Session 4 · Contemporary Communes That Work
 
-A 17-slide HTML presentation on intentional communities, ecovillages, and income-sharing communes that operate today — and the declassified record of US government campaigns against the form.
+Session 4 of the **Design an Agrarian Industrial Commune** course (The Convent, Greenpoint, Brooklyn). A reveal.js deck on intentional communities, ecovillages, and income-sharing communes that operate today — and the declassified record of US government campaigns against the form.
+
+Branding and the five-lens scoring system (PROP / GOV / LAB / MEM / OUT, 0–3) follow [Session 3](https://github.com/RonTuretzky/session3-classical-theories).
 
 **Live:** https://ronturetzky.github.io/communes-that-work/
 
