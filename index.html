@@ -1,862 +1,1089 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Session 4 · Contemporary Communes That Work</title>
-<style>
-  :root {
-    --bg: #0d0f12; --panel: #161a20; --ink: #e7e9ee; --muted: #8b94a3;
-    --accent: #d4a017; --accent-soft: #f3d27a; --good: #4ade80; --warn: #fbbf24;
-    --bad: #f87171; --border: #2a313a; --quote: #2c3340; --card: #131720;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif; line-height: 1.5; }
-  body { display: flex; flex-direction: column; }
-  header { padding: 12px 24px; border-bottom: 1px solid var(--border); display: flex;
-    justify-content: space-between; align-items: center; background: var(--panel); }
-  header h1 { margin: 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-  header .meta { font-size: 12px; color: var(--muted); }
-  main { flex: 1; overflow: hidden; position: relative; }
-  .slide { position: absolute; inset: 0; padding: 30px 54px 50px; overflow-y: auto;
-    opacity: 0; pointer-events: none; transition: opacity 0.22s ease; max-width: 1240px; margin: 0 auto; }
-  .slide.active { opacity: 1; pointer-events: auto; }
-  .kicker { color: var(--accent); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
-  .slide h2 { font-size: 27px; margin: 0 0 10px; line-height: 1.15; }
-  .slide h2 em { color: var(--accent-soft); font-style: normal; }
-  .lede { font-size: 15.5px; color: #d6dae2; margin: 0 0 16px; max-width: 90ch; }
-  .slide p { margin: 8px 0; max-width: 90ch; font-size: 14px; }
-  a { color: #93c5fd; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  blockquote { border-left: 3px solid var(--accent); margin: 12px 0; padding: 9px 16px;
-    color: #d6dae2; background: var(--quote); border-radius: 0 4px 4px 0; font-size: 13.5px; max-width: 90ch; }
-  blockquote .src { display: block; margin-top: 6px; color: var(--muted); font-size: 11.5px; font-style: normal; }
-  .grid { display: grid; gap: 12px; margin: 14px 0; }
-  .g2 { grid-template-columns: repeat(2, 1fr); }
-  .g3 { grid-template-columns: repeat(3, 1fr); }
-  .g4 { grid-template-columns: repeat(4, 1fr); }
-  @media (max-width: 900px) { .g3, .g4 { grid-template-columns: repeat(2, 1fr); } .g2 { grid-template-columns: 1fr; } }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
-  .card h3 { margin: 0 0 4px; font-size: 15px; color: var(--accent-soft); }
-  .card .sub { color: var(--muted); font-size: 11.5px; margin-bottom: 6px; }
-  .card p, .card li { font-size: 13px; color: #c9cfd9; }
-  .card ul { padding-left: 18px; margin: 6px 0; }
-  .card a.site { font-size: 12px; }
-  .stat-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 14px 0; }
-  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 10px 16px; min-width: 150px; }
-  .stat .num { color: var(--accent); font-size: 21px; font-weight: 700; display: block; line-height: 1.1; }
-  .stat .lbl { color: var(--muted); font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 3px; display: block; }
-  .docshot { background: #fff; border-radius: 4px; overflow: hidden; border: 1px solid #555; }
-  .docshot img { width: 100%; display: block; }
-  .docshot .cap { background: #1f2630; color: var(--muted); font-size: 11px; padding: 6px 10px; }
-  .docshot .cap a { color: #aac6e8; }
-  .tactic { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
-  .tactic h3 { margin: 0 0 8px; font-size: 14.5px; color: var(--accent-soft); }
-  .flow { display: flex; align-items: stretch; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
-  .flow .step { background: #1d242f; border: 1px solid var(--border); border-radius: 5px;
-    padding: 7px 9px; font-size: 11.5px; color: #c9cfd9; flex: 1; min-width: 90px; }
-  .flow .arr { color: var(--accent); align-self: center; font-size: 14px; flex: 0; }
-  .payoff { font-size: 12px; color: var(--good); margin-top: 6px; }
-  .payoff b { color: var(--good); }
-  .tq { font-size: 12px; color: #b9c2cf; border-left: 2px solid var(--accent); padding: 4px 10px; margin: 8px 0; background: var(--quote); border-radius: 0 3px 3px 0; }
-  .tq .src { color: var(--muted); font-size: 10.5px; display: block; margin-top: 3px; }
-  .gap { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.25);
-    padding: 10px 14px; border-radius: 4px; margin: 12px 0; font-size: 13px; max-width: 90ch; }
-  .gap strong { color: var(--bad); }
-  .note { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.25);
-    padding: 10px 14px; border-radius: 4px; margin: 12px 0; font-size: 13px; max-width: 90ch; }
-  .note strong { color: var(--good); }
-  .sources { margin-top: 20px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 11.5px; color: var(--muted); }
-  .sources h3 { margin: 0 0 6px; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-  .sources ol { padding-left: 20px; margin: 0; columns: 2; column-gap: 30px; }
-  .sources li { margin: 3px 0; break-inside: avoid; }
-  footer { padding: 10px 24px; border-top: 1px solid var(--border); background: var(--panel);
-    display: flex; justify-content: space-between; align-items: center; font-size: 13px; z-index: 5; }
-  .nav { display: flex; gap: 8px; align-items: center; }
-  button { background: #1f2630; color: var(--ink); border: 1px solid var(--border);
-    padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; }
-  button:hover { background: #2a323e; }
-  button:disabled { opacity: 0.4; cursor: not-allowed; }
-  .counter { color: var(--muted); min-width: 80px; text-align: center; font-variant-numeric: tabular-nums; }
-  .toc { columns: 2; column-gap: 32px; max-width: 85ch; }
-  .toc a { display: block; padding: 5px 0; color: var(--ink); break-inside: avoid; }
-  .toc a:hover { color: var(--accent); }
-  .toc .num { color: var(--muted); display: inline-block; width: 26px; }
-  /* lenses */
-  .lens-legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 10.5px; color: var(--muted); margin: 6px 0; }
-  .lens-legend span b { color: var(--accent-soft); font-weight: 600; }
-  .lens-row { display: flex; align-items: center; gap: 8px; margin: 3px 0; font-size: 11.5px; }
-  .lens-row .lbl { width: 110px; color: var(--muted); }
-  .dots { display: flex; gap: 3px; }
-  .dot { width: 9px; height: 9px; border-radius: 50%; background: #2a313a; }
-  .dot.on { background: var(--accent); }
-  /* interactive */
-  .sim { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 14px 0; }
-  .sim input[type=range] { width: 100%; accent-color: var(--accent); }
-  .sim .ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .sim .big { font-size: 34px; font-weight: 700; color: var(--accent); }
-  .sim .readout { display: flex; gap: 16px; flex-wrap: wrap; margin: 14px 0; }
-  .sim .ro { min-width: 170px; }
-  .sim .ro .v { font-size: 21px; font-weight: 700; color: var(--ink); display: block; }
-  .sim .ro .k { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .sim .tier { margin-top: 10px; font-size: 13.5px; color: #d6dae2; border-left: 3px solid var(--accent); padding: 8px 14px; background: var(--quote); border-radius: 0 4px 4px 0; }
-  .anchors { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-  .anchor { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 12px; padding: 3px 10px; cursor: pointer; }
-  .anchor:hover { color: var(--accent); border-color: var(--accent); }
-  .pill { display: inline-block; padding: 1px 8px; border: 1px solid var(--border); border-radius: 12px; font-size: 10.5px; color: var(--muted); margin-right: 5px; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Contemporary Communes That Work — Session 4</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+  <style>
+    :root {
+      --bg: #1a1a1a;
+      --paper: #FAF7F2;
+      --ink: #2a2622;
+      --muted: #b9a77a;
+      --utopian: #B5651D;
+      --anarchist: #8B0000;
+      --accent: #d4a373;
+    }
+    .reveal { font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif; color: #f3ead3; background: var(--bg); }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: #f5deb3;
+    }
+    .reveal h1 { font-size: 1.9em; line-height: 1.15; }
+    .reveal h2 { font-size: 1.3em; }
+    .reveal h3 { font-size: 1.0em; color: var(--accent); }
+
+    /* ===== Scrollable overflow on overlong slides ===== */
+    .reveal .slides > section,
+    .reveal .slides > section > section {
+      max-height: 100% !important;
+      overflow-y: auto !important;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      padding-top: 8px;
+      padding-bottom: 28px;
+      zoom: var(--slide-zoom, 1);
+    }
+
+    /* ===== In-slide zoom controls (bottom-right) ===== */
+    #zoom-controls {
+      position: fixed;
+      bottom: 16px; right: 16px;
+      z-index: 1200;
+      display: flex; gap: 6px;
+      background: rgba(20,20,20,0.7);
+      border: 1px solid var(--accent);
+      border-radius: 22px;
+      padding: 4px 8px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-family: "Inter", sans-serif;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    #zoom-controls button {
+      width: 32px; height: 32px;
+      border: none; background: transparent;
+      color: var(--accent); font-size: 18px; font-weight: 600;
+      cursor: pointer; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.12s;
+      padding: 0;
+    }
+    #zoom-controls button:hover { background: rgba(212,163,115,0.2); }
+    #zoom-controls .zoom-level {
+      display: flex; align-items: center;
+      color: var(--accent); font-size: 11px; min-width: 36px;
+      font-family: "JetBrains Mono", monospace;
+      justify-content: center; letter-spacing: 0.05em;
+    }
+    @media print { #zoom-controls { display: none !important; } }
+    .reveal.print-pdf #zoom-controls { display: none !important; }
+
+    /* Pretty scrollbar */
+    .reveal .slides > section::-webkit-scrollbar,
+    .reveal .slides > section > section::-webkit-scrollbar { width: 8px; }
+    .reveal .slides > section::-webkit-scrollbar-track,
+    .reveal .slides > section > section::-webkit-scrollbar-track { background: rgba(212,163,115,0.06); }
+    .reveal .slides > section::-webkit-scrollbar-thumb,
+    .reveal .slides > section > section::-webkit-scrollbar-thumb { background: rgba(212,163,115,0.5); border-radius: 4px; }
+    .reveal .slides > section::-webkit-scrollbar-thumb:hover,
+    .reveal .slides > section > section::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    .reveal blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 0.4em 1em;
+      background: rgba(212, 163, 115, 0.08);
+      font-style: italic;
+      width: 92%;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.0em;
+      line-height: 1.4;
+    }
+    .reveal blockquote cite {
+      display: block;
+      font-style: normal;
+      font-size: 0.55em;
+      margin-top: 0.4em;
+      color: var(--muted);
+      font-family: "Inter", sans-serif;
+    }
+    .reveal section img.scene { background: none; border: none; box-shadow: 0 6px 20px rgba(0,0,0,0.5); width: 100%; max-height: 460px; object-fit: cover; border-radius: 2px; }
+    .reveal .small { font-size: 0.62em; }
+    .reveal .tiny { font-size: 0.46em; color: #888; font-family: "Inter", sans-serif; }
+    .reveal .lede { color: var(--accent); font-style: italic; }
+    .reveal .mono { font-family: "JetBrains Mono", monospace; font-size: 0.85em; }
+
+    .reveal .credit {
+      display: block;
+      font-size: 0.42em;
+      color: #888;
+      font-style: italic;
+      margin-top: 0.3em;
+      font-family: "Inter", sans-serif;
+    }
+    .reveal .credit a { color: #aaa; text-decoration: none; border-bottom: 1px dotted #666; }
+    .reveal .credit a:hover { color: var(--accent); }
+    .reveal a { color: #e6b988; text-decoration: none; border-bottom: 1px dotted #8a7048; }
+    .reveal a:hover { color: #f5deb3; }
+
+    .reveal .chip {
+      display: inline-block;
+      font-size: 0.42em;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.25em 0.9em;
+      border-radius: 14px;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    .chip-utopian   { background: rgba(181, 101, 29, 0.25);  color: #E0A878; border: 1px solid #B5651D; }
+    .chip-anarchist { background: rgba(139, 0, 0, 0.25);     color: #E89090; border: 1px solid #B85050; }
+    .chip-frame     { background: rgba(212, 163, 115, 0.20); color: var(--accent); border: 1px solid var(--accent); }
+
+    .reveal section.title-slide h1 { font-size: 2.3em; line-height: 1.1; }
+    .reveal section.title-slide .subtitle { color: var(--accent); font-style: italic; margin-top: 0.6em; font-family: "Cormorant Garamond", serif; }
+
+    .reveal .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4em; text-align: left; align-items: start; }
+    .reveal .threecol { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; text-align: left; font-size: 0.78em; }
+
+    .reveal ul, .reveal ol { display: block; }
+    .reveal li { line-height: 1.4; margin-bottom: 0.3em; }
+
+    /* ===== Scoring legend (small) ===== */
+    .reveal .legend {
+      display: inline-block;
+      font-family: "Inter", sans-serif;
+      font-size: 0.42em;
+      color: #aaa;
+      padding: 0.4em 0.8em;
+      border: 1px dashed #555;
+      border-radius: 4px;
+      margin-top: 0.6em;
+      background: rgba(0,0,0,0.2);
+    }
+    .reveal .legend .pip { font-family: "JetBrains Mono", monospace; color: var(--accent); letter-spacing: 2px; }
+    .reveal .legend strong { color: var(--accent); letter-spacing: 0.08em; }
+
+    /* ===== Model card ===== */
+    .reveal .model-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.9em;
+      margin-top: 1em;
+    }
+    .reveal .model-grid.two   { grid-template-columns: repeat(2, 1fr); }
+    .reveal .model-card {
+      background: rgba(245, 222, 179, 0.04);
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 0.7em;
+      text-align: left;
+      font-family: "Inter", sans-serif;
+    }
+    .reveal .model-card.utopian   { border-top: 4px solid var(--utopian); }
+    .reveal .model-card.anarchist { border-top: 4px solid var(--anarchist); }
+    .reveal .model-card.frame     { border-top: 4px solid var(--accent); }
+    .reveal .model-card .name {
+      font-size: 0.7em; font-weight: 600;
+      color: #f5deb3;
+      margin-bottom: 0.1em;
+    }
+    .reveal .model-card .dates { font-size: 0.45em; color: var(--muted); margin-bottom: 0.45em; }
+    .reveal .model-card .essence {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 0.65em;
+      color: #e8dcc0;
+      line-height: 1.3;
+      margin-bottom: 0.5em;
+    }
+    .reveal .model-card .body { font-size: 0.52em; color: #ccc; line-height: 1.45; }
+    .reveal .model-card .body strong { color: var(--accent); }
+    .reveal .model-card .lensbox {
+      border-top: 1px dashed #555;
+      padding-top: 0.4em;
+      margin-top: 0.5em;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.5em;
+      color: #ccc;
+    }
+    .reveal .model-card .lensbox .row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.4em; margin-bottom: 0.15em;
+    }
+    .reveal .model-card .lensbox .label {
+      letter-spacing: 0.05em;
+      color: #888;
+      width: 38px;
+    }
+    .reveal .model-card .lensbox .bar {
+      flex: 1;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+    .reveal .model-card .gives {
+      margin-top: 0.5em;
+      font-size: 0.5em;
+      color: var(--muted);
+      font-style: italic;
+      border-top: 1px solid #444;
+      padding-top: 0.4em;
+    }
+
+    /* ===== Lens scorecard ===== */
+    .reveal .scorecard {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 0.6em 0.9em;
+      background: rgba(212, 163, 115, 0.06);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.6em;
+      text-align: left;
+      min-width: 260px;
+    }
+    .reveal .scorecard .row {
+      display: flex; align-items: center; gap: 0.5em;
+      margin-bottom: 0.15em;
+    }
+    .reveal .scorecard .label {
+      width: 80px; color: var(--muted); letter-spacing: 0.06em; font-size: 0.85em;
+    }
+    .reveal .scorecard .bar { letter-spacing: 2px; color: var(--accent); }
+    .reveal .scorecard .note { font-size: 0.7em; color: #aaa; margin-left: 0.4em; font-family: "Inter", sans-serif; }
+
+    .reveal .takeaway {
+      margin-top: 1em;
+      padding: 0.6em 1em;
+      border-left: 4px solid var(--accent);
+      background: rgba(212, 163, 115, 0.07);
+      font-style: italic;
+      font-size: 0.7em;
+      color: #f3ead3;
+      text-align: left;
+    }
+    .reveal .takeaway::before { content: "→ "; color: var(--accent); font-style: normal; font-weight: bold; }
+
+    /* ===== Doc screenshots ===== */
+    .reveal .docshot {
+      background: #FAF7F2; border-radius: 4px; overflow: hidden;
+      border: 1px solid #777; box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    }
+    .reveal .docshot img { width: 100%; display: block; background: #fff; border: none; box-shadow: none; margin: 0; }
+    .reveal .docshot .cap {
+      background: #14110d; color: #aaa; font-size: 0.42em; padding: 0.6em 1em;
+      font-family: "Inter", sans-serif; text-align: left;
+    }
+    .reveal .docshot .cap a { color: #cbb286; }
+
+    /* ===== Tactic flow ===== */
+    .reveal .tactic {
+      background: rgba(245, 222, 179, 0.04);
+      border: 1px solid #555; border-radius: 6px;
+      padding: 0.7em 0.85em; text-align: left;
+      font-family: "Inter", sans-serif;
+    }
+    .reveal .tactic h3 { font-size: 0.62em; margin: 0 0 0.5em; color: #f5deb3; }
+    .reveal .flow { display: flex; align-items: stretch; gap: 0.35em; margin: 0.4em 0; flex-wrap: wrap; }
+    .reveal .flow .step {
+      background: rgba(0,0,0,0.3); border: 1px solid #555; border-radius: 4px;
+      padding: 0.45em 0.55em; font-size: 0.42em; color: #ccc; flex: 1; min-width: 80px; line-height: 1.35;
+    }
+    .reveal .flow .arr { color: var(--accent); align-self: center; font-size: 0.6em; flex: 0; }
+    .reveal .payoff { font-size: 0.46em; color: #b8d4a0; margin-top: 0.3em; font-family: "Inter", sans-serif; }
+    .reveal .payoff strong { color: #8fbf6a; }
+    .reveal .tq {
+      font-size: 0.46em; color: #d8cfba; border-left: 2px solid var(--accent);
+      padding: 0.35em 0.7em; margin: 0.45em 0 0; background: rgba(212,163,115,0.07);
+      font-family: "Cormorant Garamond", serif; font-style: italic; line-height: 1.4;
+    }
+    .reveal .tq .src { color: #888; font-size: 0.85em; display: block; margin-top: 0.2em; font-family: "Inter", sans-serif; font-style: normal; }
+
+    /* ===== Stat chips ===== */
+    .reveal .stat-row { display: flex; gap: 0.8em; flex-wrap: wrap; justify-content: center; margin: 0.8em 0; }
+    .reveal .stat {
+      background: rgba(245, 222, 179, 0.04); border: 1px solid #555; border-radius: 6px;
+      padding: 0.5em 1em; min-width: 170px; text-align: center;
+    }
+    .reveal .stat .num { color: var(--accent); font-size: 1.0em; font-weight: 600; display: block; font-family: "JetBrains Mono", monospace; }
+    .reveal .stat .lbl { color: #999; font-size: 0.42em; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.2em; display: block; font-family: "Inter", sans-serif; }
+
+    /* ===== Interactive simulator ===== */
+    .reveal .sim {
+      background: rgba(245, 222, 179, 0.04); border: 1.5px solid var(--accent); border-radius: 8px;
+      padding: 0.9em 1.2em; margin: 0.6em auto; text-align: left; max-width: 1100px;
+      font-family: "Inter", sans-serif;
+    }
+    .reveal .sim input[type=range] { width: 100%; accent-color: var(--accent); }
+    .reveal .sim .ticks { display: flex; justify-content: space-between; font-size: 0.42em; color: #888; margin-top: 0.1em; font-family: "JetBrains Mono", monospace; }
+    .reveal .sim .big { font-size: 1.4em; font-weight: 700; color: var(--accent); font-family: "JetBrains Mono", monospace; }
+    .reveal .sim .readout { display: flex; gap: 1.2em; flex-wrap: wrap; margin: 0.6em 0; }
+    .reveal .sim .ro { min-width: 150px; }
+    .reveal .sim .ro .v { font-size: 0.85em; font-weight: 600; color: #f5deb3; display: block; font-family: "JetBrains Mono", monospace; }
+    .reveal .sim .ro .k { font-size: 0.38em; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+    .reveal .sim .tier {
+      margin-top: 0.5em; font-size: 0.55em; color: #e8dcc0; border-left: 3px solid var(--accent);
+      padding: 0.4em 0.9em; background: rgba(212,163,115,0.07);
+      font-family: "Cormorant Garamond", serif; font-style: italic; line-height: 1.45;
+    }
+    .reveal .anchors { display: flex; gap: 0.5em; flex-wrap: wrap; margin-top: 0.6em; }
+    .reveal .anchor {
+      font-size: 0.4em; color: #aaa; border: 1px solid #555; border-radius: 12px;
+      padding: 0.25em 0.9em; cursor: pointer; font-family: "Inter", sans-serif;
+    }
+    .reveal .anchor:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ===== Sources block ===== */
+    .reveal .sources {
+      margin-top: 0.8em; padding-top: 0.5em; border-top: 1px dashed #555;
+      font-size: 0.4em; color: #888; text-align: left; font-family: "Inter", sans-serif;
+    }
+    .reveal .sources strong { color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.95em; }
+    .reveal .sources a { color: #a99; }
+
+    /* ===== Big nav buttons ===== */
+    .big-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      z-index: 1100;
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: rgba(20, 20, 20, 0.55);
+      color: var(--accent);
+      font-size: 34px; line-height: 1;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: background 0.15s, transform 0.1s, opacity 0.15s, border-color 0.15s;
+      user-select: none;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+      padding: 0;
+    }
+    .big-nav:hover { background: var(--accent); color: #1a1a1a; }
+    .big-nav:active { transform: translateY(-50%) scale(0.94); }
+    .big-nav:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+    .big-nav.prev { left: 22px; }
+    .big-nav.next { right: 22px; }
+  </style>
 </head>
 <body>
+<div class="reveal">
+<div class="slides">
 
-<header>
-  <h1>Session 4 · Contemporary Communes That Work</h1>
-  <div class="meta">← / → to navigate · 17 slides</div>
-</header>
+  <!-- ============ 1 · TITLE ============ -->
+  <section class="title-slide">
+    <h1>Contemporary Communes That Work</h1>
+    <p class="subtitle">The form is alive. The slander was policy. The opening is now.</p>
+    <p class="small">Session 4 · Design an Agrarian Industrial Commune</p>
+    <p class="tiny">The Convent · Greenpoint, Brooklyn</p>
+    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1.4em; gap: 0.4em;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;margin=8&amp;data=https%3A%2F%2Fronturetzky.github.io%2Fcommunes-that-work%2F" alt="QR code to deck URL" style="width: 160px; height: 160px; background: white; padding: 8px; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.4);" />
+      <p class="tiny" style="margin: 0;">Scan to open these slides on your phone</p>
+      <p class="tiny" style="margin: 0; color: var(--accent);">ronturetzky.github.io/communes-that-work</p>
+    </div>
+    <aside class="notes">Session 4. Three moves tonight: the living form, the manufactured reputation, the arithmetic of scale.</aside>
+  </section>
 
-<main id="slides">
+  <!-- ============ 2 · THE ARGUMENT ============ -->
+  <section>
+    <h2>Three claims, in order</h2>
+    <div class="model-grid">
+      <div class="model-card frame">
+        <div class="name">1 · The form works</div>
+        <div class="essence">Income-sharing communities exist today with 59-year, 117-year, and 498-year track records.</div>
+        <div class="body">The question was never whether communal living is viable — it is which <strong>structures</strong> make it durable. Twin Oaks, the kibbutzim, the Hutterites are the existence proof.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name">2 · The reputation was manufactured</div>
+        <div class="essence">Declassified FBI and CIA files show deliberate campaigns to infiltrate and discredit communes.</div>
+        <div class="body">Including a 1970 FBI directive ordering informant coverage of <strong>every New Left commune in America</strong> — in the government's own words, on slides 7–8.</div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name">3 · The opening is now</div>
+        <div class="essence">Housing costs, care deficits, and loneliness are the exact problems communal economics solve.</div>
+        <div class="body">The contemporary wave — ecovillages, cohousing, land trusts — is already the <strong>largest since the 1970s</strong>, on four continents.</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><span class="num">3,500+</span><span class="lbl">US intentional communities (FIC est.)</span></div>
+      <div class="stat"><span class="num">~182,000</span><span class="lbl">kibbutz residents — all-time high</span></div>
+      <div class="stat"><span class="num">58,400</span><span class="lbl">Hutterites in 544 colonies</span></div>
+      <div class="stat"><span class="num">59 yrs</span><span class="lbl">Twin Oaks income-sharing</span></div>
+    </div>
+    <div class="takeaway">Roadmap: the form (3–5) → the stakes (6) → the campaign, in the documents' own words (7–8) → the honest autopsy of the 60s (9) → the arithmetic of scale (10) → who's doing it now, on four continents (11–16).</div>
+    <aside class="notes">Set up the three claims, then move fast. Stats are anchors we return to.</aside>
+  </section>
 
-<!-- 1 TITLE -->
-<section class="slide active">
-  <div class="kicker">Session 4</div>
-  <h2>Contemporary Communes <em>That Work</em></h2>
-  <p class="lede">The commune is not a failed 1960s experiment. It is a living organizational form with century-long track records, a measurable contemporary footprint, and a documented history of state and media campaigns against it. This session covers the form, the campaign, and the communities running today.</p>
-  <div class="stat-row">
-    <div class="stat"><span class="num">3,500+</span><span class="lbl">intentional communities in the US (FIC est.)</span></div>
-    <div class="stat"><span class="num">~182,000</span><span class="lbl">kibbutz residents — an all-time high (2021)</span></div>
-    <div class="stat"><span class="num">58,400</span><span class="lbl">Hutterites in 544 colonies — communal since 1528</span></div>
-    <div class="stat"><span class="num">59 yrs</span><span class="lbl">Twin Oaks income-sharing, and counting</span></div>
-  </div>
-  <h3 style="margin-top:24px;color:var(--accent);font-size:13px;letter-spacing:0.1em;text-transform:uppercase;">Contents</h3>
-  <nav class="toc">
-    <a href="#" data-go="1"><span class="num">2.</span> The argument</a>
-    <a href="#" data-go="2"><span class="num">3.</span> What a commune is — two adjacent forms</a>
-    <a href="#" data-go="3"><span class="num">4.</span> Intentional community — the wider model</a>
-    <a href="#" data-go="4"><span class="num">5.</span> Ecovillage — the ecological wing</a>
-    <a href="#" data-go="5"><span class="num">6.</span> What communes-at-scale would dismantle</a>
-    <a href="#" data-go="6"><span class="num">7.</span> The "weird commune" had help</a>
-    <a href="#" data-go="7"><span class="num">8.</span> The discredit campaign — tactics</a>
-    <a href="#" data-go="8"><span class="num">9.</span> Why the wave receded — the real reasons</a>
-    <a href="#" data-go="9"><span class="num">10.</span> At 1% · 5% · 10% · 20% — interactive</a>
-    <a href="#" data-go="10"><span class="num">11.</span> Foundation for Intentional Community</a>
-    <a href="#" data-go="11"><span class="num">12.</span> Twin Oaks — 59 years in</a>
-    <a href="#" data-go="12"><span class="num">13.</span> Ecovillages — the contemporary wave</a>
-    <a href="#" data-go="13"><span class="num">14.</span> Italian communes</a>
-    <a href="#" data-go="14"><span class="num">15.</span> Asia — the oldest living lineages</a>
-    <a href="#" data-go="15"><span class="num">16.</span> You don't have to leave the state</a>
-    <a href="#" data-go="16"><span class="num">17.</span> Sources &amp; method</a>
-  </nav>
-</section>
+  <!-- ============ 3 · WHAT A COMMUNE IS ============ -->
+  <section>
+    <h2>What a commune is — and the two adjacent forms</h2>
+    <p class="small">Three nested terms get conflated. Critics attack the broadest form using the narrowest form's stereotypes — and the law treats them very differently.</p>
+    <div class="model-grid">
+      <div class="model-card anarchist">
+        <div class="name">Commune</div>
+        <div class="dates">narrowest · income-sharing</div>
+        <div class="body">
+          <strong>Income and assets pooled.</strong> Members work for the community; the community meets needs — housing, food, healthcare, allowance. The common purse is the defining test, not shared meals or land.<br><br>
+          Living examples: Twin Oaks &amp; the FEC, Hutterite colonies, Bruderhof, shitufi kibbutzim, Yamagishi jikkenchi, Nomadelfia.
+        </div>
+        <div class="gives">Rarest form — and the one with the longest unbroken track records.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">Intentional community</div>
+        <div class="dates">the umbrella term</div>
+        <div class="body">
+          People who <strong>choose to live together around shared values</strong>, with some shared resources and governance. Includes communes, cohousing, housing co-ops, ecovillages, land trusts, monasteries.<br><br>
+          FIC estimates <strong>3,500+ in the US</strong>, 10,000–30,000 worldwide; 1,200+ listed at ic.org.
+        </div>
+        <div class="gives">Most share <em>some</em> things without pooling income.</div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name">Ecovillage</div>
+        <div class="dates">the ecological wing</div>
+        <div class="body">
+          An intentional or traditional community <strong>designed for ecological + social regeneration</strong> (GEN definition). Term coined 1991; network founded at Findhorn 1995; <strong>6,000+ communities in 114 countries</strong>.<br><br>
+          Measured: Findhorn footprint ≈ half UK average; Sieben Linden CO₂ ≈ ⅓ German average.
+        </div>
+        <div class="gives">Where the contemporary wave is largest.</div>
+      </div>
+    </div>
+    <blockquote style="margin-top:0.8em;">
+      The slur "commune" was used in 1970s zoning fights against all three forms. In <em>Village of Belle Terre v. Boraas</em> (1974) the Supreme Court upheld ordinances excluding any household of more than two unrelated people — communal or not.
+      <cite>Village of Belle Terre v. Boraas, 416 U.S. 1 (1974) — <a href="https://supreme.justia.com/cases/federal/us/416/1/">justia.com</a></cite>
+    </blockquote>
+    <aside class="notes">Definitions slide. The legal point lands hardest: the household form itself was litigated.</aside>
+  </section>
 
-<!-- 2 ARGUMENT -->
-<section class="slide">
-  <div class="kicker">Slide 2 · The argument</div>
-  <h2>Three claims, in order</h2>
-  <div class="grid g3">
-    <div class="card">
-      <h3>1. The form works</h3>
-      <p>Income-sharing communities exist today with 59-year (Twin Oaks), 117-year (kibbutz), and 498-year (Hutterite) track records. The question was never whether communal living is viable — it is which structures make it durable.</p>
+  <!-- ============ 4 · INTENTIONAL COMMUNITY EXAMPLES ============ -->
+  <section>
+    <h2>Intentional community — the working examples</h2>
+    <p class="small">The umbrella form is not hypothetical. Every name links to the community or its directory entry.</p>
+    <div class="model-grid">
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.twinoaks.org/">Twin Oaks</a></div>
+        <div class="dates">Virginia · 1967 · ~100 people · income-sharing</div>
+        <div class="body">The longest-running secular income-sharing community in the US. Full case study on slide 12.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.thefarmcommunity.com/">The Farm</a></div>
+        <div class="dates">Tennessee · 1971 · ~200 people</div>
+        <div class="body">Founded by 300 San Francisco caravanners; survived a 1983 debt crisis by restructuring to a dues-based cooperative. Home of the modern midwifery revival (Ina May Gaskin).</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.ic.org/directory/east-wind-community/">East Wind</a></div>
+        <div class="dates">Missouri · 1974 · 1,045 acres · income-sharing</div>
+        <div class="body">Twin Oaks' first spinoff. Runs East Wind Nut Butters (~$500k/yr) and Utopian Rope Sandals.</div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name"><a href="https://www.bruderhof.com/">Bruderhof</a></div>
+        <div class="dates">1920 · ~3,000 members · 20+ communities, 4 continents</div>
+        <div class="body">Anabaptist full community of goods; Community Playthings (classroom furniture) is the economic engine. <strong>105 years of unbroken common purse.</strong></div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name"><a href="https://plainanabaptistjournal.org/article/id/7063/">Hutterite colonies</a></div>
+        <div class="dates">1528 · 544 colonies · ~58,400 people · growing</div>
+        <div class="body">The longest continuous communal economy on Earth. Colonies split amoeba-like at ~120 people — a tested protocol for <strong>scaling by division</strong>.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name"><a href="https://www.ic.org/directory/ganas/">Ganas</a></div>
+        <div class="dates">Staten Island, NYC · 1979 · ~75 people</div>
+        <div class="body">Urban community across eight adjacent houses; core group income-shares, wider circle shares housing and daily feedback meetings. <strong>The form doesn't require land.</strong></div>
+      </div>
     </div>
-    <div class="card">
-      <h3>2. The reputation was partly manufactured</h3>
-      <p>Declassified FBI and CIA documents show deliberate state campaigns to infiltrate, discredit, and stigmatize communes — including a 1970 FBI directive ordering informant coverage of <em>every</em> New Left commune in America.</p>
-    </div>
-    <div class="card">
-      <h3>3. The opening is now</h3>
-      <p>Housing costs, care deficits, and loneliness are the exact problems communal economics solve. The contemporary wave — ecovillages, cohousing, community land trusts — is already the largest since the 1970s.</p>
-    </div>
-  </div>
-  <p class="lede" style="margin-top:14px;">Roadmap: define the form (slides 3–5) → what scale would threaten (6) → the campaign against it, in the documents' own words (7–8) → why the 60s wave actually receded (9) → the arithmetic of scale (10) → the communities working today, on four continents (11–16).</p>
-</section>
+    <p class="small" style="margin-top:0.6em;">Adjacent forms, same DNA: <a href="https://www.cohousing.org/">cohousing</a> (~170+ US communities), <a href="https://www.nasco.coop/">student housing co-ops</a>, <a href="https://cltweb.org/">community land trusts</a> (slide 16).</p>
+    <aside class="notes">Six living examples spanning secular/religious, rural/urban. Hutterite splitting protocol is worth dwelling on — it solves the scaling problem.</aside>
+  </section>
 
-<!-- 3 WHAT A COMMUNE IS -->
-<section class="slide">
-  <div class="kicker">Slide 3 · Definitions</div>
-  <h2>What a commune is — and the two adjacent forms</h2>
-  <p class="lede">Three nested terms get conflated. The distinctions matter because critics attack the broadest form using the narrowest form's stereotypes — and because the legal system treats them very differently.</p>
-  <div class="grid g3">
-    <div class="card">
-      <h3>Commune</h3>
-      <div class="sub">narrowest · income-sharing</div>
-      <ul>
-        <li><b>Income and assets pooled.</b> Members work for the community; the community meets needs (housing, food, healthcare, allowance).</li>
-        <li>Common purse is the defining test — not shared meals or shared land.</li>
-        <li>Living examples: Twin Oaks &amp; the FEC network, Hutterite colonies, Bruderhof, shitufi kibbutzim, Yamagishi jikkenchi (Japan), Nomadelfia (Italy).</li>
-        <li>Rarest form — and the one with the longest unbroken track records.</li>
-      </ul>
+  <!-- ============ 5 · ECOVILLAGE ============ -->
+  <section>
+    <h2>Ecovillage — where the term comes from, what it means</h2>
+    <div class="twocol" style="font-size:0.72em;">
+      <div>
+        <p><strong style="color:var(--accent);">1991</strong> — Gaia Trust (the Danish foundation of Ross &amp; Hildur Jackson) commissions Robert and Diane Gilman of the Context Institute to survey sustainable communities. Their report, <em>Ecovillages and Sustainable Communities</em>, coins the modern term.</p>
+        <p><strong style="color:var(--accent);">1995</strong> — ~400 people gather at Findhorn, Scotland; the <strong>Global Ecovillage Network</strong> is founded there.</p>
+        <p><strong style="color:var(--accent);">Today</strong> — GEN reports 6,000+ connected communities across 114 countries; 1,295 formally mapped; 252 joined in 2024 alone.</p>
+      </div>
+      <blockquote style="font-size:0.95em;">
+        "A human-scale, full-featured settlement in which human activities are harmlessly integrated into the natural world in a way that is supportive of healthy human development, and can be successfully continued into the indefinite future."
+        <cite>Robert Gilman, 1991 — <a href="https://www.context.org/iclib/ic29/cluster/">Context Institute</a></cite>
+      </blockquote>
     </div>
-    <div class="card">
-      <h3>Intentional community</h3>
-      <div class="sub">the umbrella term</div>
-      <ul>
-        <li>People who <b>choose to live together around shared values</b>, with some degree of shared resources and governance.</li>
-        <li>Includes communes, but also cohousing, housing co-ops, ecovillages, land trusts, monasteries, ashrams.</li>
-        <li>FIC estimates <b>3,500+ in the US</b>, 10,000–30,000 worldwide; 1,200+ listed in the ic.org directory.</li>
-        <li>Most share <i>some</i> things (land, meals, decisions) without pooling income.</li>
-      </ul>
+    <div class="model-grid" style="grid-template-columns: repeat(4, 1fr); margin-top:0.7em;">
+      <div class="model-card frame">
+        <div class="name">🌱 Ecological</div>
+        <div class="body">Food, water, energy, building, waste. Measured: Findhorn 2.71 gha/person ≈ <strong>half the UK average</strong> (UHI/SEI 2006); Sieben Linden CO₂ <strong>under ⅓</strong> of German average (Univ. of Kassel).</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">🤝 Social</div>
+        <div class="body">Decision-making, conflict process, inclusion, care. The dimension that kills communities when skipped — governance, not composting, is where failures happen (slide 9).</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">💰 Economic</div>
+        <div class="body">Right livelihood on the land: community businesses, local currencies (Damanhur's <em>credito</em>), shared infrastructure that collapses cost of living.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">🌍 Cultural / worldview</div>
+        <div class="body">Shared story, celebration, purpose. Sosis &amp; Bressler (slide 9): shared worldview + costly commitments is the strongest longevity predictor across 83 communes.</div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Ecovillage</h3>
-      <div class="sub">the ecological wing</div>
-      <ul>
-        <li>An intentional or traditional community <b>designed for ecological + social regeneration</b> (GEN definition).</li>
-        <li>Term coined 1991 (Gilman report for Gaia Trust); network formalized at Findhorn 1995.</li>
-        <li>GEN connects <b>6,000+ communities in 114 countries</b> (2025), incl. traditional villages adopting the framework.</li>
-        <li>Footprint evidence: Findhorn residents ≈ half UK average; Sieben Linden CO₂ ≈ ⅓ German average.</li>
-      </ul>
-    </div>
-  </div>
-  <blockquote>
-    The slur "commune" was used in 1970s zoning fights against <i>all three</i> forms. In <i>Village of Belle Terre v. Boraas</i> (1974) the Supreme Court upheld ordinances that excluded any household of more than two unrelated people — communal or not.
-    <span class="src">Village of Belle Terre v. Boraas, 416 U.S. 1 (1974) — <a href="https://supreme.justia.com/cases/federal/us/416/1/">justia.com</a></span>
-  </blockquote>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://www.ic.org/foundation-for-intentional-community/">FIC — about + directory counts</a></li>
-    <li><a href="https://ecovillage.org/about-ecovillages/">GEN — ecovillage definition &amp; network size</a></li>
-    <li><a href="https://www.thefec.org/communities/">Federation of Egalitarian Communities — member list</a></li>
-    <li><a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn footprint study (UHI/SEI 2006)</a></li>
-  </ol></div>
-</section>
+    <div class="sources"><strong>Sources</strong> · <a href="https://www.gaiaeducation.org/cart/231129-Eco-Villages-and-Sustainable-Communities">Gilman report (Gaia Education)</a> · <a href="https://ecovillage.org/2024-annual-report/">GEN 2024 Annual Report</a> · <a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn footprint study</a> · <a href="https://library.oapen.org/handle/20.500.12657/102755">Sieben Linden study (Routledge OA)</a></div>
+    <aside class="notes">GEN's four dimensions, one box each. The footprint numbers are the empirical heart of the slide.</aside>
+  </section>
 
-<!-- 4 INTENTIONAL COMMUNITY -->
-<section class="slide">
-  <div class="kicker">Slide 4 · The wider model</div>
-  <h2>Intentional community — the working examples</h2>
-  <p class="lede">The umbrella form is not hypothetical. Each of these is operating today; every name links to the community or its directory entry.</p>
-  <div class="grid g3">
-    <div class="card">
-      <h3><a href="https://www.twinoaks.org/">Twin Oaks</a></h3>
-      <div class="sub">Virginia · 1967 · ~100 people · income-sharing</div>
-      <p>The longest-running secular income-sharing community in the US. Full deep-dive on slide 12.</p>
+  <!-- ============ 6 · WHAT SCALE WOULD DISMANTLE ============ -->
+  <section>
+    <h2>What communes-at-scale would dismantle</h2>
+    <p class="small">Before looking at how communes were attacked, be clear about what a mass communal sector threatens. Each mechanism is observable in existing communities; scale is the only missing variable.</p>
+    <div class="model-grid two">
+      <div class="model-card anarchist">
+        <div class="name">The rent relation</div>
+        <div class="body">Income-sharing communities hold land and housing collectively — no landlord, no per-household mortgage. Twin Oaks houses ~100 people on a budget that would cover perhaps a dozen Bay Area rents. At scale: a structural withdrawal of tenants from the rental market.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name">Labor discipline via the exit option</div>
+        <div class="body">The threat behind every bad job is "you need this paycheck." A credible communal alternative functions like <strong>a strike fund that never runs out</strong> — raising the wage floor and bargaining power of everyone, the way kibbutzim shaped Israeli labor norms for decades.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name">The care market</div>
+        <div class="body">Childcare, eldercare, cooking, sick care are internalized as valued labor — Twin Oaks counts them at full labor-credit parity with business work. At scale this pulls billions out of paid care markets and reprices "women's work" everywhere by example.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name">Atomized consumption</div>
+        <div class="body">One commune kitchen replaces 25 kitchens; one tool shed replaces 25 garages. The measured result is the Findhorn / Sieben Linden footprint data — consumption per person collapses without lifestyle collapse.</div>
+      </div>
     </div>
-    <div class="card">
-      <h3><a href="https://www.thefarmcommunity.com/">The Farm</a></h3>
-      <div class="sub">Tennessee · 1971 · ~200 people</div>
-      <p>Founded by 300 San Francisco caravanners; survived a 1983 debt crisis by restructuring from full commune to dues-based cooperative. Home of the modern midwifery revival (Ina May Gaskin).</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.ic.org/directory/east-wind-community/">East Wind</a></h3>
-      <div class="sub">Missouri · 1974 · 1,045 acres · income-sharing</div>
-      <p>Twin Oaks' first spinoff. Runs East Wind Nut Butters (~$500k/yr) and Utopian Rope Sandals.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.bruderhof.com/">Bruderhof</a></h3>
-      <div class="sub">1920 · ~3,000 members · 20+ communities, 4 continents</div>
-      <p>Anabaptist full community of goods; runs Community Playthings (classroom furniture) as its economic engine. 105 years of unbroken common purse.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://plainanabaptistjournal.org/article/id/7063/">Hutterite colonies</a></h3>
-      <div class="sub">1528 · 544 colonies · ~58,400 people · growing</div>
-      <p>The longest continuous communal economy on Earth. Colonies split amoeba-like at ~120 people — a tested protocol for scaling by division.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.ic.org/directory/ganas/">Ganas</a></h3>
-      <div class="sub">Staten Island, NYC · 1979 · ~75 people</div>
-      <p>Urban intentional community across eight adjacent houses; core group income-shares, wider circle shares housing and daily feedback meetings. Proof the form doesn't require land.</p>
-    </div>
-  </div>
-  <p>Adjacent forms with the same DNA: <a href="https://www.cohousing.org/">cohousing</a> (~170+ US communities; private homes + common house), <a href="https://www.nasco.coop/">student housing co-ops</a>, and <a href="https://cltweb.org/">community land trusts</a> (slide 16).</p>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://www.ic.org/directory/">FIC Communities Directory</a> — each entry above is listed</li>
-    <li><a href="https://en.wikipedia.org/wiki/East_Wind_Community">East Wind — businesses &amp; acreage</a></li>
-    <li><a href="https://www.bruderhof.com/">bruderhof.com</a>; <a href="https://anabaptistworld.org/census-documents-growth-of-hutterite-population-colonies/">2024 Hutterite census</a></li>
-  </ol></div>
-</section>
+    <div class="takeaway">A movement that withdraws rent, labor desperation, care spending, and duplicate consumption — simultaneously — is not a lifestyle quirk. That is why the surveillance files on the next two slides exist.</div>
+    <aside class="notes">Stakes before the attack record — this ordering is deliberate. Each card names a market the form exits.</aside>
+  </section>
 
-<!-- 5 ECOVILLAGE -->
-<section class="slide">
-  <div class="kicker">Slide 5 · The ecological wing</div>
-  <h2>Ecovillage — where the term comes from, what it means</h2>
-  <p class="lede"><b>1991:</b> Gaia Trust — the Danish foundation of Ross and Hildur Jackson — commissions Robert and Diane Gilman (Context Institute, Seattle) to survey sustainable communities. Their report, <i>Ecovillages and Sustainable Communities</i>, coins the modern term and definition. <b>1995:</b> ~400 people gather at Findhorn, Scotland for the "Ecovillages and Sustainable Communities for the 21st Century" conference; the Global Ecovillage Network (GEN) is founded there. <b>Today:</b> GEN reports 6,000+ connected communities across 114 countries; 1,295 formally mapped, 252 joined in 2024 alone.</p>
-  <blockquote>
-    "A human-scale, full-featured settlement in which human activities are harmlessly integrated into the natural world in a way that is supportive of healthy human development, and can be successfully continued into the indefinite future."
-    <span class="src">— Robert Gilman's 1991 definition, <a href="https://www.context.org/iclib/ic29/cluster/">Context Institute</a></span>
-  </blockquote>
-  <p style="margin-top:14px;"><b>GEN's four dimensions of regeneration</b> — the framework every member community designs against:</p>
-  <div class="grid g4">
-    <div class="card">
-      <h3>🌱 Ecological</h3>
-      <p>Food, water, energy, building, waste. Measured results: Findhorn footprint 2.71 gha/person ≈ <b>half the UK average</b> (UHI/SEI 2006, lowest recorded in the industrialized world); Sieben Linden CO₂ <b>under ⅓ of German average</b> (Univ. of Kassel); Dancing Rabbit targets ~10% of US consumption.</p>
-    </div>
-    <div class="card">
-      <h3>🤝 Social</h3>
-      <p>Decision-making, conflict process, inclusion, education, care. The dimension that kills communities when skipped — governance and membership process, not composting, is where most failures happen (see slide 9).</p>
-    </div>
-    <div class="card">
-      <h3>💰 Economic</h3>
-      <p>Right livelihood on the land: community businesses, local currencies (Damanhur's <i>credito</i>), shared infrastructure that drops cost of living — the practical answer to "how do you afford it."</p>
-    </div>
-    <div class="card">
-      <h3>🌍 Cultural / worldview</h3>
-      <p>Shared story, celebration, purpose. The Sosis &amp; Bressler data (slide 9) shows shared worldview + costly commitments is the single strongest longevity predictor across 83 communes.</p>
-    </div>
-  </div>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://www.gaiaeducation.org/cart/231129-Eco-Villages-and-Sustainable-Communities">Gilman report (1991), Gaia Education archive</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Global_Ecovillage_Network">GEN founding at Findhorn 1995</a>; <a href="https://ecovillage.org/2024-annual-report/">GEN 2024 Annual Report</a>; <a href="https://ecovillage.org/gen-at-cop30/">GEN at COP30 (2025)</a></li>
-    <li><a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn footprint study PDF</a></li>
-    <li><a href="https://library.oapen.org/handle/20.500.12657/102755">Bocco et al., <i>The Environmental Impact of Sieben Linden</i> (Routledge, open access)</a></li>
-  </ol></div>
-</section>
-
-<!-- 6 WHAT SCALE WOULD DISMANTLE -->
-<section class="slide">
-  <div class="kicker">Slide 6 · Stakes</div>
-  <h2>What communes-at-scale would dismantle</h2>
-  <p class="lede">Before looking at how communes were attacked, be clear about what a mass communal sector would actually threaten. None of this is speculative — each mechanism is observable in existing communities; scale is the only missing variable.</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3>The rent relation</h3>
-      <p>Income-sharing communities hold land and housing collectively — no landlord, no mortgage per household. Twin Oaks houses ~100 people on a budget that would cover perhaps a dozen Bay Area rents. A communal sector at scale is a structural withdrawal of tenants from the rental market and buyers from the speculative housing market.</p>
-    </div>
-    <div class="card">
-      <h3>Labor discipline via the exit option</h3>
-      <p>The threat behind every bad job is "you need this paycheck." A credible, decent communal alternative functions like a strike fund that never runs out — it raises the wage floor and bargaining power of <i>everyone</i>, the same way kibbutzim shaped Israeli labor norms for decades.</p>
-    </div>
-    <div class="card">
-      <h3>The care market</h3>
-      <p>Childcare, eldercare, cooking, and sick care are internalized as valued labor (Twin Oaks counts them at full labor-credit parity with business work). At scale this pulls billions of dollars of demand out of paid care markets — and reprices "women's work" everywhere by example.</p>
-    </div>
-    <div class="card">
-      <h3>Atomized consumption</h3>
-      <p>One commune kitchen replaces 25 kitchens; one tool shed replaces 25 garages of duplicate equipment. The measured result is the Findhorn/Sieben Linden footprint data — consumption per person collapses without lifestyle collapse. Multiply by millions and entire consumer-goods categories shrink.</p>
-    </div>
-  </div>
-  <p class="lede" style="margin-top:10px;">A movement that withdraws rent, labor desperation, care spending, and duplicate consumption — simultaneously — is not a lifestyle quirk. That is why the surveillance files in the next two slides exist.</p>
-</section>
-
-<!-- 7 WEIRD COMMUNE HAD HELP -->
-<section class="slide">
-  <div class="kicker">Slide 7 · The campaign</div>
-  <h2>The "weird commune" had help</h2>
-  <p class="lede">The stock image of the commune — dirty, doomed, vaguely sinister — did not emerge purely from market forces in opinion. Declassified files show federal agencies surveilled communes as a category, defined communal living itself as an indicator of subversion, and planted derogatory material. The pages below are from the government's own releases.</p>
-  <div class="grid g2">
-    <div>
+  <!-- ============ 7 · THE WEIRD COMMUNE HAD HELP ============ -->
+  <section>
+    <h2>The "weird commune" had help</h2>
+    <p class="small">The stock image — dirty, doomed, vaguely sinister — did not emerge purely from market forces in opinion. These pages are from the government's own releases.</p>
+    <div class="twocol">
       <div class="docshot">
         <img src="assets/docs/b3-p517-commune-definition.png" alt="Church Committee Book III page 517 — FBI definition of a commune" loading="lazy">
         <div class="cap">Church Committee, Book III, p. 517 — the FBI's 17 Apr 1970 directive defining "commune." <a href="https://www.intelligence.senate.gov/sites/default/files/94755_III.pdf">Full PDF</a></div>
       </div>
-    </div>
-    <div>
-      <blockquote style="margin-top:0;">
-        "A commune is defined as a group of individuals residing in one location who practice communal living, i.e., they share income and adhere to the philosophy of a Marxist-Leninist-Maoist-oriented violent revolution… it is incumbent upon that office to conduct sufficient investigation to determine the identity of all members."
-        <span class="src">— FBI HQ to all SACs, 17 Apr 1970, quoted in Church Committee Book III, pp. 517–518</span>
-      </blockquote>
-      <blockquote>
-        "Every effort must be made by the office to obtain informant and/or sophisticated coverage of the commune and its participants…"
-        <span class="src">— same directive, continuation, Book III p. 518</span>
-      </blockquote>
-      <blockquote>
-        "Communal living follows Weatherman lifestyle and is good guide to individual's adherence to Weatherman ideology."
-        <span class="src">— FBI HQ to all SACs, 13 May 1970, Book III p. 518 — <i>the living arrangement itself treated as evidence</i></span>
-      </blockquote>
-      <blockquote>
-        "…surveillance of one of the individuals included extensive coverage of a commune in Detroit."
-        <span class="src">— CIA "Family Jewels," p. 26 (2007 release) — CIA, not FBI, surveilling a US commune</span>
-      </blockquote>
-    </div>
-  </div>
-  <div class="grid g2" style="margin-top:6px;">
-    <div class="docshot">
-      <img src="assets/docs/fj-p26-detroit-commune.png" alt="CIA Family Jewels page 26 — Detroit commune surveillance" loading="lazy">
-      <div class="cap">CIA Family Jewels, p. 26 — "extensive coverage of a commune in Detroit." <a href="https://nsarchive2.gwu.edu/NSAEBB/NSAEBB222/family_jewels_full_ocr.pdf">Full PDF (NSArchive)</a></div>
-    </div>
-    <div class="docshot">
-      <img src="assets/docs/b2-p92-every-commune.png" alt="Church Committee Book II page 92 — informant coverage of every New Left commune" loading="lazy">
-      <div class="cap">Church Committee, Book II, p. 92 — "make every effort to obtain informant coverage of <i>every</i> New Left commune." <a href="https://www.intelligence.senate.gov/sites/default/files/94755_II.pdf">Full PDF</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- 8 DISCREDIT TACTICS -->
-<section class="slide">
-  <div class="kicker">Slide 8 · The campaign, mechanized</div>
-  <h2>The discredit campaign — tactic by tactic</h2>
-  <p class="lede">Four documented tactics, each with its process and its payoff, from the Church Committee record. These are findings of a US Senate investigation, not allegations.</p>
-  <div class="grid g2">
-    <div class="tactic">
-      <h3>① Define &amp; index — criminalize the living arrangement</h3>
-      <div class="flow">
-        <div class="step">Define "commune" as inherently Marxist-revolutionary (4/17/70 directive)</div><div class="arr">→</div>
-        <div class="step">Investigate <b>every member</b> of every commune matching it</div><div class="arr">→</div>
-        <div class="step">Add members to the Security Index (detention list)</div>
+      <div>
+        <blockquote style="font-size:0.62em; width:100%;">
+          "A commune is defined as a group of individuals residing in one location who practice communal living, i.e., they share income and adhere to the philosophy of a Marxist-Leninist-Maoist-oriented violent revolution… it is incumbent upon that office to conduct sufficient investigation to determine the identity of all members."
+          <cite>FBI HQ to all SACs, 17 Apr 1970 — Church Committee Book III, pp. 517–518</cite>
+        </blockquote>
+        <blockquote style="font-size:0.62em; width:100%;">
+          "Communal living follows Weatherman lifestyle and is good guide to individual's adherence to Weatherman ideology."
+          <cite>FBI HQ to all SACs, 13 May 1970 — Book III p. 518. The living arrangement itself treated as evidence.</cite>
+        </blockquote>
+        <blockquote style="font-size:0.62em; width:100%;">
+          "…surveillance of one of the individuals included extensive coverage of a commune in Detroit."
+          <cite>CIA "Family Jewels," p. 26 (2007 release) — CIA, not FBI, surveilling a US commune</cite>
+        </blockquote>
       </div>
-      <div class="payoff"><b>Payoff:</b> shared income itself becomes probable cause. No act required — the household structure is the offense.</div>
-      <div class="tq">"A rebuttable presumption exists that persons having a past history of participation in violent leftist radical activity… living in a communal relationship constitutes a commune within the above definition."<span class="src">Book III p. 517</span></div>
     </div>
-    <div class="tactic">
-      <h3>② Infiltrate — flood the form with informants</h3>
-      <div class="flow">
-        <div class="step">Huston Plan lowers informant age limit to 18 (Sept 1970)</div><div class="arr">→</div>
-        <div class="step">SAC Letter 70-48: "aggressive policy of developing new productive informants"</div><div class="arr">→</div>
-        <div class="step">Target list: "collectives, communes and staffs of their underground newspapers"</div>
+    <div class="twocol" style="margin-top:0.6em;">
+      <div class="docshot">
+        <img src="assets/docs/fj-p26-detroit-commune.png" alt="CIA Family Jewels page 26 — Detroit commune surveillance" loading="lazy">
+        <div class="cap">CIA Family Jewels, p. 26 — "extensive coverage of a commune in Detroit." <a href="https://nsarchive2.gwu.edu/NSAEBB/NSAEBB222/family_jewels_full_ocr.pdf">Full PDF (NSArchive)</a></div>
       </div>
-      <div class="payoff"><b>Payoff:</b> chronic internal distrust. Every new member is a possible plant — poisoning the open-door culture communes depended on.</div>
-      <div class="tq">"…a tremendous opportunity to expand your coverage."<span class="src">SAC Letter 70-48, 15 Sept 1970, Book III p. 533</span></div>
-    </div>
-    <div class="tactic">
-      <h3>③ Fabricate — use the commune as a mask</h3>
-      <div class="flow">
-        <div class="step">FBI forges a letter purporting to come from a Berkeley commune</div><div class="arr">→</div>
-        <div class="step">Sends it to Huey Newton attacking Eldridge Cleaver</div><div class="arr">→</div>
-        <div class="step">Wedge driven between Panthers and white radicals — in the commune's name</div>
+      <div class="docshot">
+        <img src="assets/docs/b2-p92-every-commune.png" alt="Church Committee Book II page 92 — informant coverage of every New Left commune" loading="lazy">
+        <div class="cap">Church Committee, Book II, p. 92 — "make every effort to obtain informant coverage of <em>every</em> New Left commune." <a href="https://www.intelligence.senate.gov/sites/default/files/94755_II.pdf">Full PDF</a></div>
       </div>
-      <div class="payoff"><b>Payoff:</b> double damage — the immediate split, plus communes become suspected authors of provocations they never wrote.</div>
-      <div class="tq">"FBI headquarters approved sending Newton a bogus letter from a Berkeley, California commune condemning Cleaver for 'divorcing the BPP from white revolutionaries.'"<span class="src">Book III p. 215</span></div>
     </div>
-    <div class="tactic">
-      <h3>④ Expose — weaponize family and press</h3>
-      <div class="flow">
-        <div class="step">Identify members' parents and hometown contacts</div><div class="arr">→</div>
-        <div class="step">Anonymous letters: your child is "in a commune"</div><div class="arr">→</div>
-        <div class="step">Derogatory items fed to gossip columnists</div>
+    <aside class="notes">Let the documents speak. Scroll for the second pair of screenshots. Both PDFs are linked for verification.</aside>
+  </section>
+
+  <!-- ============ 8 · DISCREDIT TACTICS ============ -->
+  <section>
+    <h2>The discredit campaign — tactic by tactic</h2>
+    <p class="small">Four documented tactics, each with its process and payoff. These are findings of a US Senate investigation, not allegations.</p>
+    <div class="model-grid two">
+      <div class="tactic">
+        <h3>① Define &amp; index — criminalize the living arrangement</h3>
+        <div class="flow">
+          <div class="step">Define "commune" as inherently Marxist-revolutionary (4/17/70 directive)</div><div class="arr">→</div>
+          <div class="step">Investigate <strong>every member</strong> of every commune matching it</div><div class="arr">→</div>
+          <div class="step">Add members to the Security Index (detention list)</div>
+        </div>
+        <div class="payoff"><strong>Payoff:</strong> shared income itself becomes probable cause. No act required — the household structure is the offense.</div>
+        <div class="tq">"A rebuttable presumption exists that persons… living in a communal relationship constitutes a commune within the above definition."<span class="src">Book III p. 517</span></div>
       </div>
-      <div class="payoff"><b>Payoff:</b> stigma does the work surveillance can't — family pressure pulls members out, and "commune" hardens as a synonym for degeneracy in print.</div>
-      <div class="tq">"Letters were also sent to parents informing them that their children were in communes, or with a roommate of the opposite sex; information on an actress' pregnancy by a Black Panther was sent to a gossip columnist…"<span class="src">Book III p. 55 (COINTELPRO findings)</span></div>
+      <div class="tactic">
+        <h3>② Infiltrate — flood the form with informants</h3>
+        <div class="flow">
+          <div class="step">Huston Plan lowers informant age limit to 18 (Sept 1970)</div><div class="arr">→</div>
+          <div class="step">SAC Letter 70-48: "aggressive policy of developing new productive informants"</div><div class="arr">→</div>
+          <div class="step">Target: "collectives, communes and staffs of their underground newspapers"</div>
+        </div>
+        <div class="payoff"><strong>Payoff:</strong> chronic internal distrust. Every new member a possible plant — poisoning the open-door culture communes depended on.</div>
+        <div class="tq">"…a tremendous opportunity to expand your coverage."<span class="src">SAC Letter 70-48, 15 Sept 1970 — Book III p. 533</span></div>
+      </div>
+      <div class="tactic">
+        <h3>③ Fabricate — use the commune as a mask</h3>
+        <div class="flow">
+          <div class="step">FBI forges a letter purporting to come from a Berkeley commune</div><div class="arr">→</div>
+          <div class="step">Sends it to Huey Newton attacking Eldridge Cleaver</div><div class="arr">→</div>
+          <div class="step">Wedge driven between Panthers and white radicals — in the commune's name</div>
+        </div>
+        <div class="payoff"><strong>Payoff:</strong> double damage — the split itself, plus communes become suspected authors of provocations they never wrote.</div>
+        <div class="tq">"FBI headquarters approved sending Newton a bogus letter from a Berkeley, California commune condemning Cleaver…"<span class="src">Book III p. 215</span></div>
+      </div>
+      <div class="tactic">
+        <h3>④ Expose — weaponize family and press</h3>
+        <div class="flow">
+          <div class="step">Identify members' parents and hometown contacts</div><div class="arr">→</div>
+          <div class="step">Anonymous letters: your child is "in a commune"</div><div class="arr">→</div>
+          <div class="step">Derogatory items fed to gossip columnists</div>
+        </div>
+        <div class="payoff"><strong>Payoff:</strong> stigma does the work surveillance can't — family pressure pulls members out; "commune" hardens as a synonym for degeneracy in print.</div>
+        <div class="tq">"Letters were also sent to parents informing them that their children were in communes…"<span class="src">Book III p. 55 (COINTELPRO findings)</span></div>
+      </div>
     </div>
-  </div>
-  <div class="grid g3" style="margin-top:8px;">
-    <div class="docshot"><img src="assets/docs/b3-p533-sac-70-48.png" alt="Book III p533 SAC Letter 70-48" loading="lazy"><div class="cap">Book III p. 533 — SAC Letter 70-48</div></div>
-    <div class="docshot"><img src="assets/docs/b3-p215-berkeley-letter.png" alt="Book III p215 Berkeley commune letter" loading="lazy"><div class="cap">Book III p. 215 — the forged "Berkeley commune" letter</div></div>
-    <div class="docshot"><img src="assets/docs/b3-p806-yippie-commune.png" alt="Book III p806 Army infiltration of Yippie commune" loading="lazy"><div class="cap">Book III p. 806 — Army agents infiltrated a DC Yippie commune before the 1969 inauguration</div></div>
-  </div>
-</section>
+    <div class="model-grid" style="margin-top:0.6em;">
+      <div class="docshot"><img src="assets/docs/b3-p533-sac-70-48.png" alt="Book III p533 SAC Letter 70-48" loading="lazy"><div class="cap">Book III p. 533 — SAC Letter 70-48</div></div>
+      <div class="docshot"><img src="assets/docs/b3-p215-berkeley-letter.png" alt="Book III p215 Berkeley commune letter" loading="lazy"><div class="cap">Book III p. 215 — the forged "Berkeley commune" letter</div></div>
+      <div class="docshot"><img src="assets/docs/b3-p806-yippie-commune.png" alt="Book III p806 Army infiltration of Yippie commune" loading="lazy"><div class="cap">Book III p. 806 — Army agents infiltrated a DC Yippie commune, 1969</div></div>
+    </div>
+    <aside class="notes">Each tactic: process arrows then payoff then the verbatim quote. Scroll for the three supporting screenshots.</aside>
+  </section>
 
-<!-- 9 WHY THE WAVE RECEDED -->
-<section class="slide">
-  <div class="kicker">Slide 9 · The honest autopsy</div>
-  <h2>Why the wave receded — the real reasons</h2>
-  <p class="lede">Timothy Miller documented 1,600+ verified communes from 1960–75 and argues the true number ran to the tens of thousands, involving hundreds of thousands of people. Most dissolved within years. The defeatist reading — "communes don't work" — does not survive contact with the evidence. The wave ran a massive natural experiment under uniquely hostile conditions, and the variables that separate survivors from casualties are now well documented.</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3>The headwinds (external)</h3>
-      <ul>
-        <li><b>Law:</b> <i>Belle Terre v. Boraas</i> (1974) — Supreme Court upholds zoning that bans more than two unrelated people per home. Health-code raids and occupancy limits were standard anti-commune tools; FIC still calls land-use regulation the most pernicious obstacle to community formation.</li>
-        <li><b>No legal vessel:</b> nothing between "single-family home" and "apartment building" fit; no entity type held collective equity, so assets dissipated with each departure.</li>
-        <li><b>Violence and surveillance:</b> in Taos County (≈27 communes at peak) communes faced arson, dynamite, beatings, a murder — on top of the federal program on slides 7–8.</li>
-        <li><b>Macro timing:</b> the 1973–75 recession ended cheap rural land; the draft's end (1973) removed a push factor.</li>
-      </ul>
+  <!-- ============ 9 · WHY THE WAVE RECEDED ============ -->
+  <section>
+    <h2>Why the wave receded — the real reasons</h2>
+    <p class="small">Timothy Miller documented 1,600+ verified communes 1960–75 and argues the true number ran to the tens of thousands. Most dissolved. The defeatist reading — "communes don't work" — does not survive contact with the evidence.</p>
+    <div class="twocol">
+      <div class="model-card anarchist" style="font-size:1.1em;">
+        <div class="name">The headwinds (external)</div>
+        <div class="body">
+          <strong>Law:</strong> <em>Belle Terre v. Boraas</em> (1974) — zoning that bans 3+ unrelated people per home, upheld 7–2. Health-code raids were standard anti-commune tools; FIC still calls land-use regulation the most pernicious obstacle to community formation.<br><br>
+          <strong>No legal vessel:</strong> nothing between "single-family home" and "apartment building" fit; no entity type held collective equity, so assets dissipated with each departure.<br><br>
+          <strong>Violence and surveillance:</strong> Taos County (≈27 communes at peak) saw arson, dynamite, beatings, a murder — on top of the federal program on slides 7–8.<br><br>
+          <strong>Macro timing:</strong> the 1973–75 recession ended cheap rural land; the draft's end (1973) removed a push factor.
+        </div>
+      </div>
+      <div class="model-card utopian" style="font-size:1.1em;">
+        <div class="name">The unforced errors (internal — and fixable)</div>
+        <div class="body">
+          <strong>Open doors:</strong> "everyone welcome" admission with no selection or labor accountability is the most-cited failure mode — working families left when their labor subsidized transients.<br><br>
+          <strong>Undercapitalization:</strong> marginal land, no equity structure, donation income, farm inexperience.<br><br>
+          <strong>No governance:</strong> charisma or anarchy instead of decision process. Sosis's data: the top recorded dissolution causes were <em>internal dispute</em> (n=48) and <em>economic failure</em> (n=43) — solvable collective-action problems, not laws of nature.
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>The unforced errors (internal — and fixable)</h3>
-      <ul>
-        <li><b>Open doors:</b> "everyone welcome" admission with no selection or labor accountability is the most-cited failure mode — working families left when their labor subsidized transients.</li>
-        <li><b>Undercapitalization:</b> marginal land, no equity structure, donation income, farm inexperience.</li>
-        <li><b>No governance:</b> charisma or anarchy instead of decision process; Sosis's data shows the top recorded dissolution causes were <i>internal dispute</i> (n=48) and <i>economic failure</i> (n=43) — solvable collective-action problems, not laws of nature.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="note">
-    <strong>The longevity evidence:</strong> Sosis &amp; Bressler (2003), studying 83 nineteenth-century US communes: median lifespan ~25 years for religious vs ~5 for secular — but once the <i>number of costly commitments</i> (resource-sharing rules, dress codes, food norms) is controlled for, "religion" stops mattering. Kanter (1972) found durable 19th-century communities deliberately engineered commitment (sacrifice, investment, communion…). The 60s survivors still alive — Twin Oaks (1967), Padanaram (1966), The Farm (1971), East Wind (1974), Sandhill (1974) — share exactly that profile: income-sharing, member selection, real governance, binding culture. <b>Design, not luck.</b>
-  </div>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li>Timothy Miller, <i>The 60s Communes: Hippies and Beyond</i> (Syracuse UP, 1999) — <a href="https://press.syr.edu/supressbooks/478/60s-communes-the/">publisher</a></li>
-    <li><a href="https://supreme.justia.com/cases/federal/us/416/1/">Village of Belle Terre v. Boraas, 416 U.S. 1 (1974)</a></li>
-    <li>Sosis &amp; Bressler, "Cooperation and Commune Longevity," <i>Cross-Cultural Research</i> 37 (2003) — <a href="https://journals.sagepub.com/doi/10.1177/1069397103037002003">SAGE</a> · <a href="https://www.cognitionandculture.net/wp-content/uploads/Sosis_2003_CommuneLongevity.pdf">PDF</a></li>
-    <li>R.M. Kanter, <i>Commitment and Community</i> (Harvard UP, 1972)</li>
-    <li><a href="https://aeon.co/essays/like-start-ups-most-intentional-communities-fail-why">Aeon — "Like start-ups, most intentional communities fail – why?"</a></li>
-    <li><a href="https://www.taosnews.com/stories/paradise-found,52121">Taos News — "Paradise Found" (commune-era retrospective)</a></li>
-    <li><a href="https://www.ic.org/land-use-regulations-urban-planners-and-intentional-communities/">FIC on land-use regulation</a></li>
-  </ol></div>
-</section>
+    <blockquote style="margin-top:0.7em; font-size:0.72em;">
+      Sosis &amp; Bressler (2003), 83 nineteenth-century US communes: median lifespan ~25 years (religious) vs ~5 (secular) — but once the <em>number of costly commitments</em> is controlled for, "religion" stops mattering. Kanter (1972): durable communities deliberately engineered commitment. The 60s survivors still alive — Twin Oaks (1967), Padanaram (1966), The Farm (1971), East Wind (1974), Sandhill (1974) — share exactly that profile.
+      <cite><a href="https://www.cognitionandculture.net/wp-content/uploads/Sosis_2003_CommuneLongevity.pdf">Sosis &amp; Bressler, Cross-Cultural Research 37 (2003)</a> · Kanter, <em>Commitment and Community</em> (Harvard UP, 1972) · Miller, <em>The 60s Communes</em> (Syracuse UP, 1999)</cite>
+    </blockquote>
+    <div class="takeaway">Income-sharing, member selection, real governance, binding culture. Design, not luck.</div>
+    <aside class="notes">Non-defeatist autopsy. External column first — most failure narratives skip the zoning, the raids, the recession. Then the fixable internal errors, then the longevity science.</aside>
+  </section>
 
-<!-- 10 INTERACTIVE -->
-<section class="slide">
-  <div class="kicker">Slide 10 · Interactive</div>
-  <h2>At 1% · 5% · 10% · 20% — drag the slider</h2>
-  <p class="lede">What does the communal sector look like at different shares of the US population (340M)? Today the US is at roughly <b>0.04%</b>. Israel's kibbutz sector is at ~1.9% of its population right now — so the 1–2% band is not utopian; it is an existing country's present.</p>
-  <div class="sim">
-    <div><span class="big" id="pctOut">1.0%</span> <span style="color:var(--muted);font-size:13px;">of the US population living in income-sharing or strongly-communal communities</span></div>
-    <input type="range" id="pct" min="0.05" max="20" step="0.05" value="1">
-    <div class="ticks"><span>0.05%</span><span>1%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span></div>
-    <div class="readout">
-      <div class="ro"><span class="v" id="people">—</span><span class="k">people</span></div>
-      <div class="ro"><span class="v" id="comms">—</span><span class="k">communities (at ~90 residents avg)</span></div>
-      <div class="ro"><span class="v" id="perCounty">—</span><span class="k">per US county (3,143 counties)</span></div>
-      <div class="ro"><span class="v" id="cityRank">—</span><span class="k">as a "city," it would rank…</span></div>
-      <div class="ro"><span class="v" id="vsToday">—</span><span class="k">× today's US communal population</span></div>
+  <!-- ============ 10 · INTERACTIVE SCALE ============ -->
+  <section>
+    <h2>At 1% · 5% · 10% · 20% — drag the slider</h2>
+    <p class="small">The US is at roughly <strong>0.04%</strong> today. Israel's kibbutz sector is at ~1.9% <em>right now</em> — the 1–2% band is not utopian; it is an existing country's present.</p>
+    <div class="sim">
+      <div><span class="big" id="pctOut">1.0%</span> <span style="color:#999;font-size:0.5em;">of the US population (340M) living in income-sharing or strongly-communal communities</span></div>
+      <input type="range" id="pct" min="0.05" max="20" step="0.05" value="1">
+      <div class="ticks"><span>0.05%</span><span>1%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span></div>
+      <div class="readout">
+        <div class="ro"><span class="v" id="people">—</span><span class="k">people</span></div>
+        <div class="ro"><span class="v" id="comms">—</span><span class="k">communities (~90 residents avg)</span></div>
+        <div class="ro"><span class="v" id="perCounty">—</span><span class="k">per US county (3,143)</span></div>
+        <div class="ro"><span class="v" id="cityRank">—</span><span class="k">as a "city," it would rank…</span></div>
+        <div class="ro"><span class="v" id="vsToday">—</span><span class="k">× today's US communal population</span></div>
+      </div>
+      <div class="tier" id="tier"></div>
+      <div class="anchors">
+        <span class="anchor" data-set="0.05">today's US (~0.04%)</span>
+        <span class="anchor" data-set="1.9">Israel's kibbutzim now (1.9%)</span>
+        <span class="anchor" data-set="1">1%</span>
+        <span class="anchor" data-set="5">5%</span>
+        <span class="anchor" data-set="10">10%</span>
+        <span class="anchor" data-set="20">20%</span>
+      </div>
     </div>
-    <div class="tier" id="tier"></div>
-    <div class="anchors">
-      <span class="anchor" data-set="0.04">today's US (~0.04%)</span>
-      <span class="anchor" data-set="1.9">Israel's kibbutzim now (1.9%)</span>
-      <span class="anchor" data-set="1">1%</span>
-      <span class="anchor" data-set="5">5%</span>
-      <span class="anchor" data-set="10">10%</span>
-      <span class="anchor" data-set="20">20%</span>
-    </div>
-  </div>
-  <p style="font-size:12px;color:var(--muted);">Anchors: US communal population today ≈ 150k generously counted (FIC directory + Hutterites + Bruderhof). Kibbutz sector: ~182k of Israel's ~9.5M. City ranks from 2020 census. All arithmetic happens in this page — view source.</p>
-</section>
+    <p class="tiny">Anchors: US communal population today ≈ 150k generously counted (FIC directory + Hutterites + Bruderhof). Kibbutz sector: ~182k of Israel's ~9.5M. City ranks from 2020 census. All arithmetic happens in this page — view source.</p>
+    <aside class="notes">Live demo: drag to 1.9% and point out that's Israel today. Then 20% = a France-sized population.</aside>
+  </section>
 
-<!-- 11 FIC -->
-<section class="slide">
-  <div class="kicker">Slide 11 · Infrastructure</div>
-  <h2>Foundation for Intentional Community — the movement's commons</h2>
-  <p class="lede">Before looking at individual communities, meet the institution that connects them. The FIC is the seventy-seven-year-old backbone organization of the North American communities movement — its directory is how people find communities, and its publications are how communities learn from each other's failures.</p>
-  <div class="grid g3">
-    <div class="card">
-      <h3>1948 → 1986 → 2019</h3>
-      <p>Founded as the <b>Fellowship of Intentional Communities</b> in 1948 — itself an outgrowth of inter-community cooperation among 1930s–40s communities. Reincorporated 1986 at a meeting at Stelle, Illinois. Renamed <b>Foundation for Intentional Community</b> in 2019.</p>
+  <!-- ============ 11 · FIC ============ -->
+  <section>
+    <h2>Foundation for Intentional Community — the movement's commons</h2>
+    <p class="small">The seventy-seven-year-old backbone organization of the North American communities movement. Its directory is how people find communities; its publications are how communities learn from each other's failures.</p>
+    <div class="model-grid">
+      <div class="model-card frame">
+        <div class="name">1948 → 1986 → 2019</div>
+        <div class="body">Founded as the <strong>Fellowship of Intentional Communities</strong> in 1948 — an outgrowth of inter-community cooperation among 1930s–40s communities. Reincorporated 1986 at Stelle, Illinois. Renamed <strong>Foundation for Intentional Community</strong> in 2019.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">The Directory</div>
+        <div class="body"><a href="https://www.ic.org/directory/">ic.org/directory</a> lists <strong>1,200+ communities</strong>, searched by 500,000+ people a year — the de-facto matchmaking layer between seekers and communities. FIC estimates 3,500+ US communities total; most never list publicly.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">Communities magazine</div>
+        <div class="body">Published since 1972 (first as <em>Communitas</em>), 200+ issues of practitioner knowledge: governance, conflict, money, zoning. Publishing transferred to GEN-US in 2019; archive at ic.org.</div>
+      </div>
     </div>
-    <div class="card">
-      <h3>The Directory</h3>
-      <p><a href="https://www.ic.org/directory/">ic.org/directory</a> lists <b>1,200+ communities</b>, searched by 500,000+ people a year — the de-facto matchmaking layer between seekers and communities. FIC estimates 3,500+ US communities total (most never list publicly).</p>
-    </div>
-    <div class="card">
-      <h3>Communities magazine</h3>
-      <p>Published since 1972 (first as <i>Communitas</i>), 200+ issues of practitioner knowledge: governance, conflict, money, zoning. Publishing transferred to GEN-US in 2019; archive at ic.org.</p>
-    </div>
-  </div>
-  <p>Why it matters for the thesis: a movement with a directory, a magazine, a legal-resource library, and annual gatherings is not a scattering of experiments — it is an institutionalized sector that has been accumulating organizational memory since 1948. Twin Oaks (next slide) does paid admin work for the FIC: the communities literally staff their own infrastructure.</p>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://www.ic.org/foundation-for-intentional-community/">FIC — about page (directory counts, estimates)</a></li>
-    <li><a href="https://www.ic.org/timeline-of-intentional-communities/">FIC — movement timeline (1948 founding)</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Foundation_for_Intentional_Community">Wikipedia — FIC history</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Communities_(magazine)">Communities magazine history</a></li>
-  </ol></div>
-</section>
+    <div class="takeaway">A movement with a directory, a magazine, a legal-resource library, and annual gatherings is not a scattering of experiments — it is an institutionalized sector accumulating organizational memory since 1948. Twin Oaks does paid admin work for the FIC: the communities literally staff their own infrastructure.</div>
+    <div class="sources"><strong>Sources</strong> · <a href="https://www.ic.org/foundation-for-intentional-community/">FIC about page</a> · <a href="https://www.ic.org/timeline-of-intentional-communities/">FIC movement timeline</a> · <a href="https://en.wikipedia.org/wiki/Communities_(magazine)">Communities magazine history</a></div>
+    <aside class="notes">Infrastructure before case studies — FIC first, then Twin Oaks, which staffs it.</aside>
+  </section>
 
-<!-- 12 TWIN OAKS -->
-<section class="slide">
-  <div class="kicker">Slide 12 · Case study</div>
-  <h2>Twin Oaks — income-sharing, 59 years in</h2>
-  <p class="lede">Founded 1967 by eight people with no farming experience on a 123-acre Virginia tobacco farm, inspired by B.F. Skinner's <i>Walden Two</i> and co-founder Kat Kinkade. Today: ~450 acres, ~85 adult members + 15 children, full income sharing. "My other car isn't mine either."</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3>The labor-credit system</h3>
-      <p>Every member owes <b>38.5 hours/week</b> (down from 47 in the early years) — and <i>all work counts equally</i>: milking, cooking, childcare, gardening, and business work earn identical credit. Less than half of all hours go to income-generating work; the rest is the domestic economy that ordinary households do unpaid and uncounted.</p>
-      <h3 style="margin-top:12px;">The businesses</h3>
-      <p>Hammocks were 75–80% of income in the "Pier 1 decades" (70s–90s); when Pier 1 dropped them, income recovered within two years by diversification — today: <b>tofu/soyfoods</b> (~30% of income, sold to Whole Foods among others), <b>book indexing</b>, <b>seed growing</b> for Southern Exposure Seed Exchange, contract admin work for the FIC, and Twin Oaks Textiles (the hammock shop burned in 2024; a rope-hammock line continues with East Wind).</p>
-      <h3 style="margin-top:12px;">Healthcare</h3>
-      <p>The community pays all basic medical and dental care, overseen by an internal Health Team — plus catastrophic coverage through PEACH (right).</p>
+  <!-- ============ 12 · TWIN OAKS ============ -->
+  <section>
+    <h2>Twin Oaks — income-sharing, 59 years in</h2>
+    <p class="small">Founded 1967 by eight people with no farming experience on a 123-acre Virginia tobacco farm, inspired by B.F. Skinner's <em>Walden Two</em> and co-founder Kat Kinkade. Today: ~450 acres, ~85 adults + 15 children, full income sharing. <em>"My other car isn't mine either."</em></p>
+    <div class="twocol">
+      <div class="model-card frame" style="font-size:1.05em;">
+        <div class="name">The system</div>
+        <div class="body">
+          <strong>Labor credits:</strong> every member owes <strong>38.5 hrs/week</strong> (down from 47 in early years) — and all work counts equally: milking, cooking, childcare, and business work earn identical credit. Less than half of all hours go to income-generating work; the rest is the domestic economy ordinary households do unpaid.<br><br>
+          <strong>Businesses:</strong> hammocks were 75–80% of income in the "Pier 1 decades"; when Pier 1 dropped them, income recovered within two years by diversification — today: <strong>tofu/soyfoods</strong> (~30% of income, sold to Whole Foods), <strong>book indexing</strong>, <strong>seed growing</strong> for Southern Exposure, FIC admin work, Twin Oaks Textiles.<br><br>
+          <strong>Healthcare:</strong> all basic medical and dental paid by the community, overseen by an internal Health Team — plus catastrophic coverage through PEACH (right).
+        </div>
+        <div style="text-align:center; margin-top:0.6em;">
+          <div class="scorecard">
+            <div class="row"><span class="label">PROP</span><span class="bar">●●●○</span><span class="note">pooled income; personal items personal</span></div>
+            <div class="row"><span class="label">GOV</span><span class="bar">●●●○</span><span class="note">planner-manager system, recallable</span></div>
+            <div class="row"><span class="label">LAB</span><span class="bar">●●●○</span><span class="note">labor credits; all work equal</span></div>
+            <div class="row"><span class="label">MEM</span><span class="bar">●●●○</span><span class="note">3-week visitor period + vote</span></div>
+            <div class="row"><span class="label">OUT</span><span class="bar">●●●○</span><span class="note">federation (FEC) + market businesses</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="model-card utopian" style="font-size:1.05em;">
+        <div class="name">The lineage — communes that reproduce</div>
+        <div class="body">
+          <strong><a href="https://www.eastwind.org/">East Wind</a> (1974, MO):</strong> founded when Twin Oaks hit capacity — Kinkade co-founded it too. 1,045 acres; nut butters &amp; rope sandals.<br>
+          <strong><a href="https://www.southernexposure.com/about-us/">Acorn</a> (1993, VA):</strong> founded by Twin Oakers 7 miles away; runs <strong>Southern Exposure Seed Exchange</strong>, a major heirloom seed company.<br>
+          <strong>Sapling (2013):</strong> Acorn bought land to seed a third community; it folded — and <strong>Mimosa</strong> took over the land. Even the failures get recycled into new attempts.<br>
+          <strong><a href="https://www.ic.org/directory/cambia/">Cambia</a> (2015):</strong> ex-Twin Oakers next door; tiny-house village in the visitor orbit.<br><br>
+          <strong>The FEC (1976):</strong> the <a href="https://www.thefec.org/">Federation of Egalitarian Communities</a> — first assembly at East Wind; Kinkade modeled it on kibbutz federations. Two concrete mutual-aid systems:<br>
+          <strong><a href="https://www.thefec.org/about/projects/peach/">PEACH</a></strong> — the federation's self-insurance fund for catastrophic health costs: the home community covers roughly the first $5,000 of a claim; PEACH pays the rest. Communal healthcare, federated.<br>
+          <strong><a href="https://www.thefec.org/about/projects/lex/">LEX</a></strong> — work at any FEC community and earn labor credits <em>at home</em>, travel subsidized. A common labor market across communes: Sandhill imports harvest help each fall, sends members out each winter.
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>The spinoff lineage — communes that reproduce</h3>
-      <ul>
-        <li><b><a href="https://www.eastwind.org/">East Wind</a> (1974, Missouri):</b> founded when Twin Oaks hit capacity — Kinkade went on to co-found it. 1,045 acres; nut butters &amp; rope sandals.</li>
-        <li><b><a href="https://www.southernexposure.com/about-us/">Acorn</a> (1993, Virginia):</b> founded by Twin Oakers (incl. Kinkade) 7 miles away; runs <b>Southern Exposure Seed Exchange</b>, a major heirloom/organic seed company.</li>
-        <li><b>Sapling (2013):</b> Acorn bought land to seed a third community; it folded, and <b>Mimosa</b> took over the land — even the failures get recycled into new attempts.</li>
-        <li><b><a href="https://www.ic.org/directory/cambia/">Cambia</a> (2015):</b> founded by ex-Twin Oakers next door; tiny-house village in the Twin Oaks visitor orbit.</li>
-      </ul>
-      <h3 style="margin-top:12px;">The FEC — federation since 1976</h3>
-      <p>The <a href="https://www.thefec.org/">Federation of Egalitarian Communities</a> (first assembly at East Wind, Dec 1976; Kinkade modeled it on kibbutz federations) links Twin Oaks, Acorn, East Wind, Sandhill + a dozen communities in dialog. Two concrete mutual-aid systems:</p>
-      <ul>
-        <li><b><a href="https://www.thefec.org/about/projects/peach/">PEACH</a></b> — the federation's <i>self-insurance fund for catastrophic health costs</i>: the home community covers roughly the first $5,000 of a claim; PEACH pays the rest. Communal healthcare, federated.</li>
-        <li><b><a href="https://www.thefec.org/about/projects/lex/">LEX (labor exchange)</a></b> — work at any FEC community and earn labor credits <i>at home</i>, with travel subsidized. A common labor market across communes: Sandhill imports harvest help each fall and sends members out each winter.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://www.twinoaks.org/">twinoaks.org</a> — population, hours, businesses, health policy</li>
-    <li><a href="https://en.wikipedia.org/wiki/Twin_Oaks_Community,_Virginia">Wikipedia — Twin Oaks</a></li>
-    <li><a href="https://www.thefec.org/about/history-of-the-fec/">FEC history</a> · <a href="https://www.thefec.org/communities/">member list</a></li>
-    <li><a href="https://geo.coop/story/communities-self-insure-cooperative-healthcare">GEO — "Communities self-insure: cooperative healthcare" (PEACH mechanics)</a></li>
-    <li><a href="https://communelifeblog.wordpress.com/2017/10/20/twin-oaks-over-time/">Commune Life — "Twin Oaks over time" (income history)</a></li>
-  </ol></div>
-</section>
+    <div class="sources"><strong>Sources</strong> · <a href="https://www.twinoaks.org/">twinoaks.org</a> · <a href="https://en.wikipedia.org/wiki/Twin_Oaks_Community,_Virginia">Wikipedia</a> · <a href="https://www.thefec.org/about/history-of-the-fec/">FEC history</a> · <a href="https://geo.coop/story/communities-self-insure-cooperative-healthcare">GEO on PEACH</a> · <a href="https://communelifeblog.wordpress.com/2017/10/20/twin-oaks-over-time/">Commune Life — income history</a></div>
+    <aside class="notes">The scorecard uses our five lenses, 0–3. OUT=2 (federation) is the headline: the FEC is lens 5, level 2, running since 1976 — PEACH and LEX are what federation concretely means.</aside>
+  </section>
 
-<!-- 13 ECOVILLAGES WAVE -->
-<section class="slide">
-  <div class="kicker">Slide 13 · The contemporary wave</div>
-  <h2>Ecovillages — the largest commune wave since the 70s</h2>
-  <div class="grid g3">
-    <div class="card">
-      <h3><a href="https://www.findhorn.org/">Findhorn</a> · Scotland · 1962</h3>
-      <div class="sub">~400 residents at The Park · ~40 community businesses</div>
-      <p>Started by the Caddys and Dorothy Maclean in a caravan park; became the movement's mother church — GEN was founded here in 1995. The 2006 UHI/SEI study measured residents' footprint at 2.71 gha — <b>half the UK average</b>, the lowest recorded in the industrialized world. The Foundation closed its education arm in 2023; the ecovillage itself continues under community ownership.</p>
+  <!-- ============ 13 · ECOVILLAGE WAVE ============ -->
+  <section>
+    <h2>Ecovillages — the largest commune wave since the 70s</h2>
+    <div class="model-grid">
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.findhorn.org/">Findhorn</a></div>
+        <div class="dates">Scotland · 1962 · ~400 residents · ~40 businesses</div>
+        <div class="body">The movement's mother church — GEN founded here 1995. The 2006 UHI/SEI study measured residents' footprint at 2.71 gha — <strong>half the UK average</strong>, the lowest recorded in the industrialized world. The Foundation closed its education arm in 2023; the ecovillage continues under community ownership.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://auroville.org/">Auroville</a></div>
+        <div class="dates">India · 1968 · ~3,300 residents from ~60 nations</div>
+        <div class="body">The largest intentional community on Earth, endorsed by four UNESCO resolutions, centered on the Matrimandir. No private land ownership; internal maintenance economy instead of wages for many roles. Since 2021 in a governance struggle with the centrally-appointed Foundation.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.tamera.org/">Tamera</a></div>
+        <div class="dates">Portugal · 1995 · ~150–200 residents · 335 acres</div>
+        <div class="body">"Healing Biotope 1" — peace-research center known for the water-retention landscape that re-greened a desertifying Alentejo valley, its solar village test field, and decades of research on community and trust.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://crystalwaters.org.au/">Crystal Waters</a></div>
+        <div class="dates">Australia · 1987 · ~250 residents · UN World Habitat Award</div>
+        <div class="body">The world's first intentional <strong>permaculture</strong> village — 83 freehold lots, ~80% of land held in common. Proof the model works with private homes + commons hybrid tenure.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://ecovillageithaca.org/">EcoVillage at Ithaca</a></div>
+        <div class="dates">New York · 1991 · 200+ residents · 3 neighborhoods</div>
+        <div class="body">One of the world's largest cohousing complexes (Frog, Song, Tree; ~100 homes), 90% of its 175 acres kept open, newest homes net-zero. The mainstream-friendly face of the wave — driveways, mortgages, and a common house.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://siebenlinden.org/en/">Sieben Linden</a></div>
+        <div class="dates">Germany · 1997 · ~140 people</div>
+        <div class="body">World's densest straw-bale settlement. Univ. of Kassel research: per-capita CO₂ <strong>under one-third</strong> the German average, housing emissions down ~90%; ~75% vegetable self-sufficiency. Book-length Routledge impact study (open access).</div>
+      </div>
     </div>
-    <div class="card">
-      <h3><a href="https://auroville.org/">Auroville</a> · India · 1968</h3>
-      <div class="sub">~3,300 residents from ~60 nations · UNESCO-endorsed</div>
-      <p>The largest intentional community on Earth, founded by Mirra Alfassa near Puducherry, endorsed by four UNESCO resolutions, centered on the Matrimandir. No private land ownership; an internal economy with a maintenance system instead of wages for many roles. Since 2021 in a governance struggle with the centrally-appointed Auroville Foundation.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.tamera.org/">Tamera</a> · Portugal · 1995</h3>
-      <div class="sub">~150–200 residents · 335 acres, Alentejo</div>
-      <p>"Healing Biotope 1" — peace research center known for its water-retention landscape that re-greened a desertifying valley, its solar village test field, and decades of research on community, trust, and love free of possession.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://crystalwaters.org.au/">Crystal Waters</a> · Australia · 1987</h3>
-      <div class="sub">~250 residents · 259 ha · UN World Habitat Award 1996</div>
-      <p>The world's first intentional <b>permaculture</b> village — 83 freehold lots on land 80% held in common, designed by Mollison-lineage permaculturists. Proof the model works with private homes + commons hybrid tenure.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://ecovillageithaca.org/">EcoVillage at Ithaca</a> · NY · 1991</h3>
-      <div class="sub">200+ residents · 3 cohousing neighborhoods · 175 acres</div>
-      <p>One of the world's largest cohousing complexes: Frog, Song, and Tree neighborhoods, ~100 homes, 90% of land kept open, newest homes net-zero. The mainstream-friendly face of the wave — driveways, mortgages, and a common house.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://siebenlinden.org/en/">Sieben Linden</a> · Germany · 1997</h3>
-      <div class="sub">~140 people · world's densest straw-bale settlement</div>
-      <p>Univ. of Kassel research: per-capita CO₂ <b>under one-third</b> the German average, housing emissions down ~90%. ~75% vegetable self-sufficiency. Subject of a book-length Routledge environmental-impact study (open access).</p>
-    </div>
-  </div>
-  <p><a href="https://www.dancingrabbit.org/">Dancing Rabbit</a> (Missouri, 1997, ~50–70 people) deserves mention for the hardest covenants in the US: no personal cars, no fossil fuel for heating or cooling, organic land use only — targeting ~10% of average US consumption.</p>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn footprint study (2006)</a> · <a href="https://en.wikipedia.org/wiki/Findhorn_Foundation">status 2023</a></li>
-    <li><a href="https://auroville.org/page/census%20-%20auroville-population-539">Auroville census</a> · <a href="https://en.wikipedia.org/wiki/Auroville">Wikipedia</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/Tamera">Tamera</a> · <a href="https://en.wikipedia.org/wiki/Crystal_Waters,_Queensland">Crystal Waters</a> · <a href="https://ecovillage.org/ecovillage/ecovillage-at-ithaca/">EVI (GEN profile)</a></li>
-    <li><a href="https://library.oapen.org/handle/20.500.12657/102755">Sieben Linden impact study (Routledge OA)</a> · <a href="https://www.resilience.org/stories/2015-03-11/dancing-rabbit-ecovillage-living-abundantly-on-10/">Dancing Rabbit 10% claim</a></li>
-  </ol></div>
-</section>
+    <p class="small" style="margin-top:0.6em;"><a href="https://www.dancingrabbit.org/">Dancing Rabbit</a> (Missouri, 1997, ~50–70 people) has the hardest covenants in the US: no personal cars, no fossil fuel for heating or cooling, organic land use only — targeting ~10% of average US consumption.</p>
+    <div class="sources"><strong>Sources</strong> · <a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn study</a> · <a href="https://auroville.org/page/census%20-%20auroville-population-539">Auroville census</a> · <a href="https://en.wikipedia.org/wiki/Crystal_Waters,_Queensland">Crystal Waters</a> · <a href="https://library.oapen.org/handle/20.500.12657/102755">Sieben Linden study</a> · <a href="https://www.resilience.org/stories/2015-03-11/dancing-rabbit-ecovillage-living-abundantly-on-10/">Dancing Rabbit 10%</a></div>
+    <aside class="notes">Six flagships, one line of evidence each. Findhorn and Sieben Linden carry the measured-footprint argument.</aside>
+  </section>
 
-<!-- 14 ITALY -->
-<section class="slide">
-  <div class="kicker">Slide 14 · Europe's densest scene</div>
-  <h2>Italian communes — where the practice actually lives</h2>
-  <p class="lede">Italy hosts one of Europe's deepest communal cultures — Catholic, esoteric, and anarchist lineages running in parallel, several with full common purses.</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Nomadelfia">Nomadelfia</a> · Tuscany · 1948</h3>
-      <div class="sub">~250–300 people · Catholic · zero internal money</div>
-      <p>Founded by priest Don Zeno Saltini around families who adopted war orphans. <b>No money circulates inside</b>; all property common; children raised by "family groups" of several households. Recognized within the Catholic Church; Pope Francis visited in 2018. Seventy-seven years of common purse — the longest-running full commune in Western Europe.</p>
+  <!-- ============ 14 · ITALY ============ -->
+  <section>
+    <h2>Italian communes — where the practice actually lives</h2>
+    <p class="small">Italy hosts one of Europe's deepest communal cultures — Catholic, esoteric, and anarchist lineages running in parallel, several with full common purses.</p>
+    <div class="model-grid two">
+      <div class="model-card utopian">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Nomadelfia">Nomadelfia</a></div>
+        <div class="dates">Tuscany · 1948 · ~250–300 people · Catholic · zero internal money</div>
+        <div class="body">Founded by priest Don Zeno Saltini around families who adopted war orphans. <strong>No money circulates inside</strong>; all property common; children raised by "family groups" of several households. Pope Francis visited in 2018. <strong>Seventy-seven years of common purse</strong> — the longest-running full commune in Western Europe.</div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Damanhur">Damanhur</a></div>
+        <div class="dates">Piedmont · 1975 · ~600 citizens · own currency</div>
+        <div class="body">Esoteric federation in the Valchiusella valley: ~20-person <em>nucleo</em> households, an internal complementary currency (the <em>credito</em>), elected guides, schools, dozens of businesses. Famous for the <strong>Temples of Humankind</strong> — a cathedral-scale underground complex excavated in secret for 14 years before its 1992 discovery. GEN member.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name"><a href="https://it.wikipedia.org/wiki/Urupia">Urupia</a></div>
+        <div class="dates">Puglia · 1995 · anarchist · consensus · common purse</div>
+        <div class="body">Libertarian commune on a restored <em>masseria</em> in Salento: full income pooling, consensus-only decisions, wine and olive-oil production marketed through Italy's solidarity-economy networks. The living refutation of "anarchist communes can't run a business."</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name"><a href="https://it.wikipedia.org/wiki/Popolo_degli_Elfi">Popolo degli Elfi</a></div>
+        <div class="dates">Tuscan Apennines · ~1980 · ~200 people</div>
+        <div class="body">The "Elf People" reoccupied abandoned mountain hamlets above Pistoia, restoring stone houses and chestnut-terrace agriculture: subsistence farming, no formal hierarchy, seasonal assemblies. Italy's thousands of empty hamlets are the land bank this model demonstrates.</div>
+      </div>
     </div>
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Damanhur">Damanhur</a> · Piedmont · 1975</h3>
-      <div class="sub">~600 citizens in nucleo-households · own currency</div>
-      <p>Esoteric federation in the Valchiusella valley founded by Oberto Airaudi: ~20-person <i>nucleo</i> communities, an internal complementary currency (the <i>credito</i>), elected guides, schools, and dozens of businesses. Famous for the <b>Temples of Humankind</b> — a cathedral-scale underground complex the community excavated in secret for 14 years before its 1992 discovery. GEN member, frequently cited as Europe's largest spiritual ecovillage federation.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://it.wikipedia.org/wiki/Urupia">Urupia</a> · Puglia · 1995</h3>
-      <div class="sub">anarchist · consensus · common purse</div>
-      <p>Libertarian commune on a restored <i>masseria</i> in Salento: full income pooling, consensus-only decisions, wine and olive-oil production marketed through Italy's solidarity-economy networks. The living refutation of "anarchist communes can't run a business."</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://it.wikipedia.org/wiki/Popolo_degli_Elfi">Popolo degli Elfi</a> · Tuscan Apennines · ~1980</h3>
-      <div class="sub">~200 people across reoccupied mountain hamlets</div>
-      <p>The "Elf People" reoccupied abandoned villages above Pistoia, restoring stone houses and chestnut-terrace agriculture: subsistence farming, no formal hierarchy, seasonal assemblies. Italy's depopulated mountains — thousands of empty hamlets — are the land bank this model demonstrates.</p>
-    </div>
-  </div>
-  <p>Context: Italy's <i>Rete Italiana Villaggi Ecologici</i> (<a href="https://ecovillaggi.it/">RIVE</a>) federates ~30+ communities; the abandoned-village stock (estimated in the thousands) keeps land cost near zero for new projects — the structural opposite of the US land problem on slide 9.</p>
-</section>
+    <div class="takeaway">Italy's <a href="https://ecovillaggi.it/">RIVE network</a> federates 30+ communities; the abandoned-village stock keeps land cost near zero for new projects — the structural opposite of the US land problem on slide 9.</div>
+    <aside class="notes">Four lineages: Catholic (Nomadelfia), esoteric (Damanhur), anarchist (Urupia), feral (Elfi). The land-cost point closes the loop with the failure analysis.</aside>
+  </section>
 
-<!-- 15 ASIA -->
-<section class="slide">
-  <div class="kicker">Slide 15 · Beyond the West</div>
-  <h2>Asia — the oldest living lineages</h2>
-  <p class="lede">The commune is not a Western counterculture artifact. Asia hosts the world's largest intentional community, Japan's century-old service communes, Thailand's Buddhist merit-economy villages, and the kibbutz — the most successful communal movement in modern history, currently at an all-time population high.</p>
-  <div class="grid g3">
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Yamagishi_movement">Yamagishi-kai</a> · Japan · 1950s</h3>
-      <div class="sub">~1,200 members · income-sharing jikkenchi villages</div>
-      <p>Founded by farmer Miyozo Yamagishi; members live <b>without money or personal possessions</b> in <i>jikkenchi</i> ("places to realize the principles"). Toyosato (Mie Pref.) is the largest with 400+ members; eggs and dairy at industrial scale. Affiliates in Australia, Brazil, Thailand, Korea, Switzerland.</p>
+  <!-- ============ 15 · ASIA ============ -->
+  <section>
+    <h2>Asia — the oldest living lineages</h2>
+    <p class="small">The commune is not a Western counterculture artifact. Asia hosts the world's largest intentional community, Japan's century-old service communes, Thailand's Buddhist merit-economy villages, and the kibbutz — at an all-time population high.</p>
+    <div class="model-grid">
+      <div class="model-card frame">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Yamagishi_movement">Yamagishi-kai</a></div>
+        <div class="dates">Japan · 1950s · ~1,200 members · income-sharing villages</div>
+        <div class="body">Founded by farmer Miyozo Yamagishi; members live <strong>without money or personal possessions</strong> in <em>jikkenchi</em> ("places to realize the principles"). Toyosato (Mie Pref.) is the largest, 400+ members; eggs and dairy at industrial scale. Affiliates in Australia, Brazil, Thailand, Korea, Switzerland.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://ecovillage.org/food-sovereignty-of-konohana-family/">Konohana Family</a></div>
+        <div class="dates">Japan · 1994 · ~100 members · foot of Mt. Fuji</div>
+        <div class="body">One common bank account pays for everything from clothes to university tuition; nightly consensus meetings; grows <strong>~99% of its own food</strong> (200+ crop varieties); footprint ≈ ⅓ the Japanese average.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Santi_Asoke">Santi Asoke</a></div>
+        <div class="dates">Thailand · 1975 · ~10 villages · ~10,000 adherents</div>
+        <div class="body">Founded by Samana Bodhirak after splitting from the official Sangha. <strong>Bunniyom ("meritism")</strong> economy — goods sold at or below cost to earn merit, not profit. Organic farms, own schools, free meals. Prefigured Thailand's official "sufficiency economy" doctrine.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Kibbutz">Kibbutzim</a></div>
+        <div class="dates">Israel · 1909 · ~270 kibbutzim · ~182,000 residents</div>
+        <div class="body">From Degania (1910, still extant) to today: after the 1990s crisis ~72% adopted differential salaries ("renewed"), while <strong>~60 remain fully income-sharing</strong> — yet all retain mutual-guarantee floors, and population has grown every year since the mid-2000s. <strong>Adaptation, not collapse.</strong></div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.sarvodaya.org/about-us/">Sarvodaya Shramadana</a></div>
+        <div class="dates">Sri Lanka · 1958 · ~15,000 villages</div>
+        <div class="body">A.T. Ariyaratne's Gandhian-Buddhist movement: village self-governance through shared labor (<em>shramadana</em>), ~5,500 independent village societies, cooperative economics, microfinance. The largest communal-governance network in Asia.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.ittoen.or.jp/english/">Ittōen</a></div>
+        <div class="dates">Kyoto · 1904 · ~100–150 residents · 121 years old</div>
+        <div class="body">Tenkō Nishida's community of "the life of the Light": members renounce possessions and practice humble service — famously, cleaning toilets as spiritual practice. Own school and businesses. Older than every Western commune now operating except the Hutterite/Bruderhof lineage.</div>
+      </div>
     </div>
-    <div class="card">
-      <h3><a href="https://ecovillage.org/food-sovereignty-of-konohana-family/">Konohana Family</a> · Japan · 1994</h3>
-      <div class="sub">~100 members at the foot of Mt. Fuji</div>
-      <p>One common bank account pays for everything from clothes to university tuition; nightly consensus meetings; grows <b>~99% of its own food</b> (200+ crop varieties); footprint ≈ ⅓ the Japanese average.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Santi_Asoke">Santi Asoke</a> · Thailand · 1975</h3>
-      <div class="sub">~10 self-sufficient Buddhist villages · ~10,000 adherents</div>
-      <p>Founded by Samana Bodhirak after splitting from the official Sangha. <b>Bunniyom ("meritism")</b> economy — goods sold at or below cost to earn merit, not profit. Organic farms, own schools, free meals. Its model prefigured Thailand's official "sufficiency economy" doctrine.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Kibbutz">Kibbutzim</a> · Israel · 1909</h3>
-      <div class="sub">~270 kibbutzim · ~182,000 residents — all-time high</div>
-      <p>From Degania (1910, still extant) to today: after a 1990s crisis, ~72% adopted differential salaries ("renewed"), while <b>~60 remain fully income-sharing</b> — yet all retain mutual guarantee floors, and population has <i>grown</i> every year since the mid-2000s. Adaptation, not collapse.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.sarvodaya.org/about-us/">Sarvodaya Shramadana</a> · Sri Lanka · 1958</h3>
-      <div class="sub">~15,000 villages · ~5,500 independent village societies</div>
-      <p>A.T. Ariyaratne's Gandhian-Buddhist movement: village self-governance through shared labor (<i>shramadana</i>), cooperative economics, microfinance. Not communes — but the largest communal-governance network in Asia.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.ittoen.or.jp/english/">Ittōen</a> · Kyoto · 1904</h3>
-      <div class="sub">~100–150 residents · 121 years old</div>
-      <p>Tenkō Nishida's community of "the life of the Light": members renounce possessions and practice humble service (famously, cleaning toilets as spiritual practice). Own school and businesses. Older than every Western commune now operating except the Hutterite/Bruderhof lineage.</p>
-    </div>
-  </div>
-  <p><span class="pill">cross-ref</span>Auroville (slide 13) is also Asia's largest intentional community — ~3,300 residents in Tamil Nadu.</p>
-  <div class="sources"><h3>Sources</h3><ol>
-    <li><a href="https://apjjf.org/john-spiri/2666/article">Asia-Pacific Journal — "Whatever Happened to Yamagishi?"</a></li>
-    <li><a href="https://ourworld.unu.edu/en/konohana">UN University — Konohana profile</a></li>
-    <li><a href="https://www.buddhistdoor.net/news/thailands-santi-asoke-flourishes-by-promoting-simplicity/">Buddhistdoor — Santi Asoke</a></li>
-    <li><a href="https://www.jta.org/2021/03/18/israel/a-year-of-covid-lockdowns-has-revived-israels-kibbutz-movement">JTA — kibbutz revival (182k, 2021)</a> · <a href="https://en.wikipedia.org/wiki/Kibbutz">Wikipedia — privatization split</a></li>
-    <li><a href="https://www.sarvodaya.org/about-us/">sarvodaya.org</a> · <a href="https://tricycle.org/magazine/yen-cleaning/">Tricycle — Ittōen</a></li>
-  </ol></div>
-</section>
+    <p class="small" style="margin-top:0.5em;"><span class="chip chip-frame">cross-ref</span> Auroville (slide 13) is also Asia's largest intentional community — ~3,300 residents in Tamil Nadu.</p>
+    <div class="sources"><strong>Sources</strong> · <a href="https://apjjf.org/john-spiri/2666/article">Asia-Pacific Journal — Yamagishi</a> · <a href="https://ourworld.unu.edu/en/konohana">UN University — Konohana</a> · <a href="https://www.buddhistdoor.net/news/thailands-santi-asoke-flourishes-by-promoting-simplicity/">Buddhistdoor — Santi Asoke</a> · <a href="https://www.jta.org/2021/03/18/israel/a-year-of-covid-lockdowns-has-revived-israels-kibbutz-movement">JTA — kibbutz revival</a> · <a href="https://tricycle.org/magazine/yen-cleaning/">Tricycle — Ittōen</a></div>
+    <aside class="notes">Non-Western slide, per feedback. Ittōen predates every 60s commune by six decades. The kibbutz adaptation story counters the "privatization = death" narrative.</aside>
+  </section>
 
-<!-- 16 DON'T HAVE TO LEAVE THE STATE -->
-<section class="slide">
-  <div class="kicker">Slide 16 · Hybrids</div>
-  <h2>You don't have to leave the state</h2>
-  <p class="lede">Communal economics also runs <i>inside</i> cities, municipalities, and firms. Each example below is scored on the five lenses used throughout this session (0–5 dots).</p>
-  <div class="lens-legend">
-    <span><b>I</b> income pooling</span><span><b>L</b> common land/housing</span><span><b>G</b> self-governance</span><span><b>D</b> shared daily life</span><span><b>W</b> shared worldview</span>
-  </div>
-  <div class="grid g3">
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Freetown_Christiania">Christiania</a> · Copenhagen · 1971</h3>
-      <div class="sub">~1,000 residents on a squatted naval base</div>
-      <div class="lens-row"><span class="lbl">Income pooling</span><span class="dots" data-d="1"></span></div>
-      <div class="lens-row"><span class="lbl">Common land</span><span class="dots" data-d="5"></span></div>
-      <div class="lens-row"><span class="lbl">Self-governance</span><span class="dots" data-d="4"></span></div>
-      <div class="lens-row"><span class="lbl">Shared daily life</span><span class="dots" data-d="3"></span></div>
-      <div class="lens-row"><span class="lbl">Shared worldview</span><span class="dots" data-d="3"></span></div>
-      <p>Fifty-four years of collective land control in a capital city; since 2012 residents collectively purchase the land through the Christiania Foundation. No private home ownership — houses revert to the commons.</p>
+  <!-- ============ 16 · DON'T HAVE TO LEAVE THE STATE ============ -->
+  <section>
+    <h2>You don't have to leave the state</h2>
+    <p class="small">Communal economics also runs <em>inside</em> cities, municipalities, and firms. Each example scored on the course's five lenses.</p>
+    <div><span class="legend"><strong>Legend:</strong> <strong>PROP</strong>=Property · <strong>GOV</strong>=Governance · <strong>LAB</strong>=Labor · <strong>MEM</strong>=Membership · <strong>OUT</strong>=Outside · Scores 0–3 · <span class="pip">●○○○</span>=0 <span class="pip">●●○○</span>=1 <span class="pip">●●●○</span>=2 <span class="pip">●●●●</span>=3</span></div>
+    <div class="model-grid">
+      <div class="model-card anarchist">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Freetown_Christiania">Christiania</a></div>
+        <div class="dates">Copenhagen · 1971 · ~1,000 residents on a former naval base</div>
+        <div class="body">54 years of collective land control in a capital city; since 2012 residents collectively purchase the land through the Christiania Foundation. No private home ownership — houses revert to the commons.</div>
+        <div class="lensbox">
+          <div class="row"><span class="label">PROP</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">GOV</span><span class="bar">●●●●</span></div>
+          <div class="row"><span class="label">LAB</span><span class="bar">●○○○</span></div>
+          <div class="row"><span class="label">MEM</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">OUT</span><span class="bar">●●●●</span></div>
+        </div>
+        <div class="gives">Maximizes: consensus self-rule + negotiated coexistence with the Danish state.</div>
+      </div>
+      <div class="model-card anarchist">
+        <div class="name"><a href="https://en.wikipedia.org/wiki/Marinaleda">Marinaleda</a></div>
+        <div class="dates">Andalusia · 1979– · ~2,600 people — a communal municipality</div>
+        <div class="body">Village that won 1,200 ha of a duke's land after a decade of occupations; the El Humoso cooperative employs at equal wages; self-built homes at ~€15/month; general assemblies decide the budget.</div>
+        <div class="lensbox">
+          <div class="row"><span class="label">PROP</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">GOV</span><span class="bar">●●●○</span></div>
+          <div class="row"><span class="label">LAB</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">MEM</span><span class="bar">●○○○</span></div>
+          <div class="row"><span class="label">OUT</span><span class="bar">●●●●</span></div>
+        </div>
+        <div class="gives">Maximizes: it <em>is</em> the municipal state — lens 5 taken to its limit.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.mondragon-corporation.com/en/">Mondragón</a></div>
+        <div class="dates">Basque Country · 1956 · ~70,000 worker-owners</div>
+        <div class="body">The largest co-op federation on Earth. One worker one vote; pay ratios capped (~1:6 typical); internal solidarity funds move money between co-ops in trouble — PEACH logic at industrial scale.</div>
+        <div class="lensbox">
+          <div class="row"><span class="label">PROP</span><span class="bar">●○○○</span></div>
+          <div class="row"><span class="label">GOV</span><span class="bar">●●●○</span></div>
+          <div class="row"><span class="label">LAB</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">MEM</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">OUT</span><span class="bar">●●●●</span></div>
+        </div>
+        <div class="gives">Maximizes: democratic governance at firm scale, fully inside the market.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.cohousing.org/">Cohousing</a></div>
+        <div class="dates">Denmark → world · 1970s– · ~170+ US communities</div>
+        <div class="body">Private homes + common house + shared meals, resident-managed. The Danish <em>bofællesskab</em> model proved communal infrastructure is compatible with mortgages — the gateway form.</div>
+        <div class="lensbox">
+          <div class="row"><span class="label">PROP</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">GOV</span><span class="bar">●●●○</span></div>
+          <div class="row"><span class="label">LAB</span><span class="bar">●○○○</span></div>
+          <div class="row"><span class="label">MEM</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">OUT</span><span class="bar">●●○○</span></div>
+        </div>
+        <div class="gives">Maximizes: shared infrastructure with zero income pooling — demonstration form.</div>
+      </div>
+      <div class="model-card frame">
+        <div class="name"><a href="https://www.getahome.org/">Community land trusts</a></div>
+        <div class="dates">US · 1969– · 300+ CLTs; Champlain Housing Trust ≈ 3,000 homes</div>
+        <div class="body">Land held by a nonprofit forever; homes sold with resale caps — permanently decommodified ground under ordinary private lives. Invented in the civil-rights movement (New Communities, GA, 1969).</div>
+        <div class="lensbox">
+          <div class="row"><span class="label">PROP</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">GOV</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">LAB</span><span class="bar">●○○○</span></div>
+          <div class="row"><span class="label">MEM</span><span class="bar">●●○○</span></div>
+          <div class="row"><span class="label">OUT</span><span class="bar">●●●●</span></div>
+        </div>
+        <div class="gives">Maximizes: land decommodification, in partnership with city and state funding.</div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name">Reading the lenses</div>
+        <div class="dates">full communes score ●●●○–●●●● across the board</div>
+        <div class="body">Twin Oaks, Hutterites, and Nomadelfia run 2–3 on every lens. The hybrids each take <strong>one or two lenses to maximum</strong> inside the existing state: Christiania and CLTs on land, Mondragón on governance at firm scale, Marinaleda as a municipality.</div>
+        <div class="gives">Strategic read: the lenses are separable — and each separable piece has already been proven somewhere at scale.</div>
+      </div>
     </div>
-    <div class="card">
-      <h3><a href="https://en.wikipedia.org/wiki/Marinaleda">Marinaleda</a> · Andalusia · 1979–</h3>
-      <div class="sub">~2,600 people — a communal <i>municipality</i></div>
-      <div class="lens-row"><span class="lbl">Income pooling</span><span class="dots" data-d="2"></span></div>
-      <div class="lens-row"><span class="lbl">Common land</span><span class="dots" data-d="4"></span></div>
-      <div class="lens-row"><span class="lbl">Self-governance</span><span class="dots" data-d="4"></span></div>
-      <div class="lens-row"><span class="lbl">Shared daily life</span><span class="dots" data-d="2"></span></div>
-      <div class="lens-row"><span class="lbl">Shared worldview</span><span class="dots" data-d="4"></span></div>
-      <p>Village that won 1,200 ha of duke's land after a decade of occupations; the El Humoso cooperative employs at equal wages; self-built homes at ~€15/month; general assemblies decide the budget.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.mondragon-corporation.com/en/">Mondragón</a> · Basque Country · 1956</h3>
-      <div class="sub">~70,000 worker-owners — the largest co-op federation</div>
-      <div class="lens-row"><span class="lbl">Income pooling</span><span class="dots" data-d="2"></span></div>
-      <div class="lens-row"><span class="lbl">Common land</span><span class="dots" data-d="1"></span></div>
-      <div class="lens-row"><span class="lbl">Self-governance</span><span class="dots" data-d="4"></span></div>
-      <div class="lens-row"><span class="lbl">Shared daily life</span><span class="dots" data-d="1"></span></div>
-      <div class="lens-row"><span class="lbl">Shared worldview</span><span class="dots" data-d="2"></span></div>
-      <p>One worker one vote; pay ratios capped (~1:6 typical); internal solidarity funds move money between co-ops in trouble — the FEC's PEACH logic at industrial scale.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.cohousing.org/">Cohousing</a> · Denmark → world · 1970s–</h3>
-      <div class="sub">~170+ US communities; mainstream in DK</div>
-      <div class="lens-row"><span class="lbl">Income pooling</span><span class="dots" data-d="0"></span></div>
-      <div class="lens-row"><span class="lbl">Common land</span><span class="dots" data-d="3"></span></div>
-      <div class="lens-row"><span class="lbl">Self-governance</span><span class="dots" data-d="4"></span></div>
-      <div class="lens-row"><span class="lbl">Shared daily life</span><span class="dots" data-d="3"></span></div>
-      <div class="lens-row"><span class="lbl">Shared worldview</span><span class="dots" data-d="1"></span></div>
-      <p>Private homes + common house + shared meals, resident-managed. The Danish <i>bofællesskab</i> model proved communal infrastructure is compatible with mortgages — the gateway form.</p>
-    </div>
-    <div class="card">
-      <h3><a href="https://www.getahome.org/">Community land trusts</a> · 1969–</h3>
-      <div class="sub">300+ US CLTs; Champlain Housing Trust ≈ 3,000 homes</div>
-      <div class="lens-row"><span class="lbl">Income pooling</span><span class="dots" data-d="0"></span></div>
-      <div class="lens-row"><span class="lbl">Common land</span><span class="dots" data-d="5"></span></div>
-      <div class="lens-row"><span class="lbl">Self-governance</span><span class="dots" data-d="3"></span></div>
-      <div class="lens-row"><span class="lbl">Shared daily life</span><span class="dots" data-d="1"></span></div>
-      <div class="lens-row"><span class="lbl">Shared worldview</span><span class="dots" data-d="2"></span></div>
-      <p>Land held by a nonprofit forever; homes sold with resale caps — permanently decommodified ground under ordinary private lives. Invented in the US civil-rights movement (New Communities, GA, 1969).</p>
-    </div>
-    <div class="card">
-      <h3>Reading the lenses</h3>
-      <p style="margin-top:4px;">Full communes (Twin Oaks, Hutterites, Nomadelfia) score 4–5 on every lens. The hybrids each take <i>one or two lenses to maximum</i> inside the existing state: Christiania and CLTs maximize common land; Mondragón maximizes governance at firm scale; Marinaleda does it as a municipality.</p>
-      <p>Strategic read: the lenses are separable. You can decommodify land without sharing income, or share governance without sharing meals — and each separable piece has already been proven somewhere at scale.</p>
-    </div>
-  </div>
-</section>
+    <aside class="notes">Five hybrids + the meta-card, all on PROP/GOV/LAB/MEM/OUT from Session 3. The separability point is the session's strategic conclusion.</aside>
+  </section>
 
-<!-- 17 SOURCES -->
-<section class="slide">
-  <div class="kicker">Slide 17 · Method</div>
-  <h2>Sources &amp; method</h2>
-  <p class="lede">Every factual claim in this deck traces to a primary source (declassified government document, community's own publication, federation records, peer-reviewed study) or a named scholarly work. Government-document page numbers refer to the PDF files as published, so every screenshot can be re-derived.</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3>Declassified / government</h3>
-      <ul>
-        <li><a href="https://www.intelligence.senate.gov/sites/default/files/94755_II.pdf">Church Committee Final Report, Book II</a> (PDF p. 92)</li>
-        <li><a href="https://www.intelligence.senate.gov/sites/default/files/94755_III.pdf">Church Committee Final Report, Book III</a> (PDF pp. 55, 215, 517–518, 533, 806)</li>
-        <li><a href="https://nsarchive2.gwu.edu/NSAEBB/NSAEBB222/family_jewels_full_ocr.pdf">CIA "Family Jewels," 2007 release</a> (PDF p. 26)</li>
-        <li><a href="https://www.aarclibrary.org/publib/church/rockcomm/pdf/RockComm_Chap11_CHAOS.pdf">Rockefeller Commission, ch. 11 (Operation CHAOS)</a></li>
-        <li><a href="https://supreme.justia.com/cases/federal/us/416/1/">Village of Belle Terre v. Boraas, 416 U.S. 1 (1974)</a></li>
-      </ul>
+  <!-- ============ 17 · SOURCES ============ -->
+  <section>
+    <h2>Sources &amp; method</h2>
+    <p class="small">Every factual claim traces to a primary source or named scholarly work. Government-document page numbers refer to the PDF files as published, so every screenshot can be re-derived.</p>
+    <div class="model-grid two" style="font-size:1.05em;">
+      <div class="model-card frame">
+        <div class="name">Declassified / government</div>
+        <div class="body">
+          <a href="https://www.intelligence.senate.gov/sites/default/files/94755_II.pdf">Church Committee Final Report, Book II</a> (PDF p. 92)<br>
+          <a href="https://www.intelligence.senate.gov/sites/default/files/94755_III.pdf">Church Committee Final Report, Book III</a> (PDF pp. 55, 215, 517–518, 533, 806)<br>
+          <a href="https://nsarchive2.gwu.edu/NSAEBB/NSAEBB222/family_jewels_full_ocr.pdf">CIA "Family Jewels," 2007 release</a> (PDF p. 26)<br>
+          <a href="https://www.aarclibrary.org/publib/church/rockcomm/pdf/RockComm_Chap11_CHAOS.pdf">Rockefeller Commission ch. 11 (Op. CHAOS)</a><br>
+          <a href="https://supreme.justia.com/cases/federal/us/416/1/">Village of Belle Terre v. Boraas, 416 U.S. 1 (1974)</a>
+        </div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">Scholarship</div>
+        <div class="body">
+          Timothy Miller, <em>The 60s Communes</em> (Syracuse UP, 1999)<br>
+          Sosis &amp; Bressler, "Cooperation and Commune Longevity," <em>Cross-Cultural Research</em> 37 (2003) — <a href="https://www.cognitionandculture.net/wp-content/uploads/Sosis_2003_CommuneLongevity.pdf">PDF</a><br>
+          Rosabeth Moss Kanter, <em>Commitment and Community</em> (Harvard UP, 1972)<br>
+          Bocco et al., <em>The Environmental Impact of Sieben Linden Ecovillage</em> (Routledge 2019, <a href="https://library.oapen.org/handle/20.500.12657/102755">open access</a>)<br>
+          <a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn footprint study (UHI/SEI 2006)</a>
+        </div>
+      </div>
+      <div class="model-card frame">
+        <div class="name">Movement primary sources</div>
+        <div class="body">
+          <a href="https://www.twinoaks.org/">twinoaks.org</a> · <a href="https://www.thefec.org/">thefec.org</a> (PEACH, LEX) · <a href="https://www.ic.org/">ic.org</a><br>
+          <a href="https://ecovillage.org/">ecovillage.org (GEN)</a> · <a href="https://www.gaiaeducation.org/">Gaia Education</a><br>
+          <a href="https://auroville.org/">auroville.org</a> · <a href="https://www.findhorn.org/">findhorn.org</a> · <a href="https://www.tamera.org/">tamera.org</a> · <a href="https://siebenlinden.org/en/">siebenlinden.org</a><br>
+          <a href="https://plainanabaptistjournal.org/article/id/7063/">2024 Hutterite census</a> · <a href="https://www.bruderhof.com/">bruderhof.com</a>
+        </div>
+      </div>
+      <div class="model-card utopian">
+        <div class="name">Known limits</div>
+        <div class="body">
+          Twin Oaks population/hours vary slightly by source and year — current twinoaks.org figures used.<br>
+          PEACH ~$5,000 deductible is from a ~2019 GEO article; may have changed.<br>
+          Dancing Rabbit's "10% of US consumption" is affiliated research, not peer-reviewed.<br>
+          Italian commune figures (Damanhur ~600, Nomadelfia ~300) are community-reported.<br>
+          The slide-10 simulator's 90-person average community size is a stated assumption.
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Scholarship</h3>
-      <ul>
-        <li>Timothy Miller, <i>The 60s Communes</i> (Syracuse UP, 1999)</li>
-        <li>Sosis &amp; Bressler, "Cooperation and Commune Longevity," <i>Cross-Cultural Research</i> 37 (2003) — <a href="https://www.cognitionandculture.net/wp-content/uploads/Sosis_2003_CommuneLongevity.pdf">PDF</a></li>
-        <li>Rosabeth Moss Kanter, <i>Commitment and Community</i> (Harvard UP, 1972)</li>
-        <li>Bocco et al., <i>The Environmental Impact of Sieben Linden Ecovillage</i> (Routledge, 2019, <a href="https://library.oapen.org/handle/20.500.12657/102755">open access</a>)</li>
-        <li><a href="https://www.ecovillagefindhorn.com/docs/FF%20Footprint.pdf">Findhorn ecological footprint study (UHI/SEI, 2006)</a></li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Movement / community primary sources</h3>
-      <ul>
-        <li><a href="https://www.twinoaks.org/">twinoaks.org</a> · <a href="https://www.thefec.org/">thefec.org</a> (PEACH, LEX, history) · <a href="https://www.ic.org/">ic.org</a></li>
-        <li><a href="https://ecovillage.org/">ecovillage.org (GEN)</a> · <a href="https://www.gaiaeducation.org/">Gaia Education</a></li>
-        <li><a href="https://auroville.org/">auroville.org</a> · <a href="https://www.findhorn.org/">findhorn.org</a> · <a href="https://www.tamera.org/">tamera.org</a> · <a href="https://siebenlinden.org/en/">siebenlinden.org</a></li>
-        <li><a href="https://plainanabaptistjournal.org/article/id/7063/">2024 Hutterite census (J. Plain Anabaptist Communities)</a> · <a href="https://www.bruderhof.com/">bruderhof.com</a></li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Known limits</h3>
-      <ul>
-        <li>Twin Oaks population/hours vary slightly by source and year — current twinoaks.org figures used.</li>
-        <li>PEACH ~$5,000 deductible figure is from a ~2019 GEO article; may have changed.</li>
-        <li>Dancing Rabbit's "10% of US consumption" is affiliated research, not peer-reviewed.</li>
-        <li>Italian commune figures (Damanhur ~600, Nomadelfia ~300) are community-reported.</li>
-        <li>Interactive-slide arithmetic is illustrative: 90-person average community size is an assumption, stated on the slide.</li>
-      </ul>
-    </div>
-  </div>
-  <p style="color:var(--muted);font-size:12px;">Companion deck: <i>How the CIA &amp; US Government Disparaged Communes</i> — the full declassified-document tour this session's slides 7–8 draw from.</p>
-</section>
+    <p class="tiny" style="margin-top:0.6em;">Companion deck: <em>How the CIA &amp; US Government Disparaged Communes</em> — the full declassified-document tour slides 7–8 draw from.</p>
+    <aside class="notes">Method slide: known-limits card matters — it's what separates this from advocacy.</aside>
+  </section>
 
-</main>
+  <!-- ============ 18 · THANK YOU ============ -->
+  <section style="text-align: center;">
+    <h1>Thank you.</h1>
+    <p class="lede" style="margin-top:1em;">The form works. The slander was policy. The opening is now.</p>
+    <div style="display: flex; flex-direction: column; align-items: center; margin: 1.2em 0; gap: 0.4em;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;margin=8&amp;data=https%3A%2F%2Fronturetzky.github.io%2Fcommunes-that-work%2F" alt="QR code to deck URL" style="width: 140px; height: 140px; background: white; padding: 8px; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.4);" />
+      <p class="tiny" style="margin: 0;">Take the deck home: <span style="color: var(--accent);">ronturetzky.github.io/communes-that-work</span></p>
+    </div>
+    <p class="tiny">Session 4 · Design an Agrarian Industrial Commune · The Convent, Greenpoint</p>
+    <aside class="notes">End. QR + URL for take-home.</aside>
+  </section>
 
-<footer>
-  <div class="legend" style="font-size:12px;color:var(--muted);">Session 4 · Contemporary Communes That Work</div>
-  <div class="nav">
-    <button id="prev">← Prev</button>
-    <span class="counter" id="counter">1 / 17</span>
-    <button id="next">Next →</button>
-  </div>
-</footer>
+</div>
+</div>
 
+<!-- Big nav buttons -->
+<button id="big-nav-prev" class="big-nav prev" aria-label="Previous slide">‹</button>
+<button id="big-nav-next" class="big-nav next" aria-label="Next slide">›</button>
+
+<!-- Zoom controls -->
+<div id="zoom-controls">
+  <button id="zoom-out" aria-label="Zoom out">−</button>
+  <span class="zoom-level" id="zoom-level">100%</span>
+  <button id="zoom-in" aria-label="Zoom in">+</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 <script>
-  const slides = document.querySelectorAll('.slide');
-  const counter = document.getElementById('counter');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  let i = 0;
-  function show(n) {
-    i = Math.max(0, Math.min(slides.length - 1, n));
-    slides.forEach((s, k) => s.classList.toggle('active', k === i));
-    counter.textContent = (i + 1) + ' / ' + slides.length;
-    prev.disabled = i === 0;
-    next.disabled = i === slides.length - 1;
-    const act = document.querySelector('.slide.active');
-    if (act) act.scrollTop = 0;
-    location.hash = 'slide-' + (i + 1);
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    backgroundTransition: 'fade',
+    width: 1400,
+    height: 900,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    plugins: [ RevealNotes ]
+  });
+
+  // ---------- Big nav buttons ----------
+  const navPrev = document.getElementById('big-nav-prev');
+  const navNext = document.getElementById('big-nav-next');
+  navPrev.addEventListener('click', () => Reveal.prev());
+  navNext.addEventListener('click', () => Reveal.next());
+  function updateNavDisabled() {
+    navPrev.disabled = !!(Reveal.isFirstSlide && Reveal.isFirstSlide());
+    navNext.disabled = !!(Reveal.isLastSlide && Reveal.isLastSlide());
   }
-  prev.addEventListener('click', () => show(i - 1));
-  next.addEventListener('click', () => show(i + 1));
-  document.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'INPUT') return;
-    if (e.key === 'ArrowRight') { e.preventDefault(); show(i + 1); }
-    if (e.key === 'ArrowLeft') show(i - 1);
-    if (e.key === 'Home') show(0);
-    if (e.key === 'End') show(slides.length - 1);
-  });
-  document.querySelectorAll('[data-go]').forEach(el => {
-    el.addEventListener('click', (e) => { e.preventDefault(); show(parseInt(el.dataset.go, 10)); });
-  });
-  const m = location.hash.match(/slide-(\d+)/);
-  show(m ? parseInt(m[1], 10) - 1 : 0);
+  Reveal.on('ready', updateNavDisabled);
+  Reveal.on('slidechanged', updateNavDisabled);
 
-  // lens dots
-  document.querySelectorAll('.dots').forEach(d => {
-    const n = parseInt(d.dataset.d, 10);
-    for (let k = 0; k < 5; k++) {
-      const s = document.createElement('span');
-      s.className = 'dot' + (k < n ? ' on' : '');
-      d.appendChild(s);
-    }
-  });
+  // ---------- Zoom controls ----------
+  const ZOOM_KEY = 'session4-slide-zoom-v1';
+  const zoomLevelEl = document.getElementById('zoom-level');
+  let zoom = parseFloat(localStorage.getItem(ZOOM_KEY) || '1');
+  function applyZoom() {
+    document.documentElement.style.setProperty('--slide-zoom', zoom);
+    zoomLevelEl.textContent = Math.round(zoom * 100) + '%';
+    localStorage.setItem(ZOOM_KEY, String(zoom));
+  }
+  document.getElementById('zoom-in').addEventListener('click', () => { zoom = Math.min(1.6, +(zoom + 0.1).toFixed(2)); applyZoom(); });
+  document.getElementById('zoom-out').addEventListener('click', () => { zoom = Math.max(0.5, +(zoom - 0.1).toFixed(2)); applyZoom(); });
+  applyZoom();
 
-  // interactive simulator
+  // ---------- Scale simulator ----------
   const US_POP = 340e6, TODAY = 150000, AVG = 90, COUNTIES = 3143;
-  const cities = [
-    [8.8e6, "#2 — bigger than every US city except NYC"],
-    [3.9e6, "#1 — bigger than NYC itself"],
-    [1e30, ""]
-  ];
   function cityRank(p) {
-    if (p >= 68e6) return "— a population the size of France";
-    if (p >= 34e6) return "— more people than all of Canada";
-    if (p >= 17e6) return "#1 — twice the size of NYC";
+    if (p >= 68e6) return "a France-sized population";
+    if (p >= 34e6) return "more than all of Canada";
+    if (p >= 17e6) return "#1 — twice NYC";
     if (p >= 8.8e6) return "#1 — bigger than NYC";
     if (p >= 3.9e6) return "#2 — second only to NYC";
     if (p >= 2.7e6) return "#3 — bigger than Chicago";
@@ -871,13 +1098,13 @@
   }
   function tierText(pct) {
     if (pct < 0.5) return "Roughly where the US is now (~0.04%) up to ~10× it: a visible subculture. The directory, the federations, PEACH-style mutual aid — the infrastructure on slides 11–12 — already exists at this scale.";
-    if (pct < 3) return "The Israel zone (kibbutzim ≈ 1.9% today): every county has communities; the form is normalized — a known life option with waiting lists, not an oddity. Mutual-aid funds reach actuarial scale; banks and insurers build products for it.";
-    if (pct < 8) return "A housing-market segment: millions of units of demand withdrawn from rental and speculative markets. A political constituency on the scale of organized labor's core — zoning reform stops being a niche ask.";
-    if (pct < 15) return "A labor-market alternative: the exit option is real for every worker, disciplining wages and conditions economy-wide (the strike fund that never runs out, slide 6). Regional food and care systems run substantially through the communal sector.";
+    if (pct < 3) return "The Israel zone (kibbutzim ≈ 1.9% today): every county has communities; the form is normalized — a known life option with waiting lists. Mutual-aid funds reach actuarial scale; banks build products for it.";
+    if (pct < 8) return "A housing-market segment: millions of units withdrawn from rental and speculative markets. A political constituency on the scale of organized labor's core — zoning reform stops being a niche ask.";
+    if (pct < 15) return "A labor-market alternative: the exit option is real for every worker, disciplining wages and conditions economy-wide (the strike fund that never runs out — slide 6). Regional food and care systems run substantially through the communal sector.";
     return "A structural counterweight: at 20% (68M people — France-sized), the rent relation, the care market, and atomized consumption are no longer universal defaults. This is the scale the kibbutz sector approached in pre-state Israel — when it shaped the institutions of the entire society.";
   }
   const slider = document.getElementById('pct');
-  function update() {
+  function updateSim() {
     const pct = parseFloat(slider.value);
     const people = US_POP * pct / 100;
     document.getElementById('pctOut').textContent = pct.toFixed(pct < 1 ? 2 : 1) + "%";
@@ -888,10 +1115,9 @@
     document.getElementById('vsToday').textContent = (people / TODAY).toFixed(people/TODAY < 10 ? 1 : 0) + "×";
     document.getElementById('tier').textContent = tierText(pct);
   }
-  slider.addEventListener('input', update);
-  document.querySelectorAll('.anchor').forEach(a => a.addEventListener('click', () => { slider.value = a.dataset.set; update(); }));
-  update();
+  slider.addEventListener('input', updateSim);
+  document.querySelectorAll('.anchor').forEach(a => a.addEventListener('click', () => { slider.value = a.dataset.set; updateSim(); }));
+  updateSim();
 </script>
-
 </body>
 </html>
