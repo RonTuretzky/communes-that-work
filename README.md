@@ -12,6 +12,7 @@ Branding and the five-lens scoring system (PROP / GOV / LAB / MEM / OUT, 0–3) 
 - The declassified discredit campaign (FBI COINTELPRO, CIA Family Jewels) with page screenshots from the Church Committee reports
 - Why the 1960s wave receded — structural headwinds vs. unforced errors (Miller, Sosis & Bressler, Kanter)
 - Interactive scale simulator (1% / 5% / 10% / 20% of US population)
+- Network states: Balaji's model scored on the course lenses, the Overthrowing The Network State critique, and Coordi-Nations as the federated alternative
 - Case studies: Twin Oaks & the FEC, the ecovillage wave, Italian communes, Asian lineages, and state-compatible hybrids (Christiania, Marinaleda, Mondragón, cohousing, CLTs)
 
 ## Document screenshots
