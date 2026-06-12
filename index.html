@@ -391,8 +391,8 @@
     <div class="model-grid">
       <div class="model-card frame">
         <div class="name">1 · The form works</div>
-        <div class="essence">Income-sharing communities exist today with 59-year, 117-year, and 498-year track records.</div>
-        <div class="body">The question was never whether communal living is viable — it is which <strong>structures</strong> make it durable. Twin Oaks, the kibbutzim, the Hutterites are the existence proof.</div>
+        <div class="essence">Income-sharing communities exist today with 59-year, 105-year, and 498-year track records.</div>
+        <div class="body">The question was never whether communal living is viable — it is which <strong>structures</strong> make it durable. Twin Oaks, the Bruderhof, the Hutterites are the existence proof.</div>
       </div>
       <div class="model-card anarchist">
         <div class="name">2 · The reputation was manufactured</div>
@@ -407,7 +407,7 @@
     </div>
     <div class="stat-row">
       <div class="stat"><span class="num">3,500+</span><span class="lbl">US intentional communities (FIC est.)</span></div>
-      <div class="stat"><span class="num">~182,000</span><span class="lbl">kibbutz residents — all-time high</span></div>
+      <div class="stat"><span class="num">6,000+</span><span class="lbl">GEN ecovillages in 114 countries</span></div>
       <div class="stat"><span class="num">58,400</span><span class="lbl">Hutterites in 544 colonies</span></div>
       <div class="stat"><span class="num">59 yrs</span><span class="lbl">Twin Oaks income-sharing</span></div>
     </div>
@@ -682,7 +682,7 @@
   <!-- ============ 10 · INTERACTIVE SCALE ============ -->
   <section>
     <h2>At 1% · 5% · 10% · 20% — drag the slider</h2>
-    <p class="small">The US is at roughly <strong>0.04%</strong> today. Israel's kibbutz sector is at ~1.9% <em>right now</em> — the 1–2% band is not utopian; it is an existing country's present.</p>
+    <p class="small">The US is at roughly <strong>0.04%</strong> today — so even the 1% mark is a 25× expansion, and the slider's upper range is a different society.</p>
     <div class="sim">
       <div><span class="big" id="pctOut">1.0%</span> <span style="color:#999;font-size:0.5em;">of the US population (340M) living in income-sharing or strongly-communal communities</span></div>
       <input type="range" id="pct" min="0.05" max="20" step="0.05" value="1">
@@ -697,15 +697,14 @@
       <div class="tier" id="tier"></div>
       <div class="anchors">
         <span class="anchor" data-set="0.05">today's US (~0.04%)</span>
-        <span class="anchor" data-set="1.9">Israel's kibbutzim now (1.9%)</span>
         <span class="anchor" data-set="1">1%</span>
         <span class="anchor" data-set="5">5%</span>
         <span class="anchor" data-set="10">10%</span>
         <span class="anchor" data-set="20">20%</span>
       </div>
     </div>
-    <p class="tiny">Anchors: US communal population today ≈ 150k generously counted (FIC directory + Hutterites + Bruderhof). Kibbutz sector: ~182k of Israel's ~9.5M. City ranks from 2020 census. All arithmetic happens in this page — view source.</p>
-    <aside class="notes">Live demo: drag to 1.9% and point out that's Israel today. Then 20% = a France-sized population.</aside>
+    <p class="tiny">Anchors: US communal population today ≈ 150k generously counted (FIC directory + Hutterites + Bruderhof). City ranks from 2020 census. All arithmetic happens in this page — view source.</p>
+    <aside class="notes">Live demo: walk the slider through the four tiers. 20% = a France-sized population.</aside>
   </section>
 
   <!-- ============ 11 · FIC ============ -->
@@ -1200,10 +1199,10 @@
   }
   function tierText(pct) {
     if (pct < 0.5) return "Roughly where the US is now (~0.04%) up to ~10× it: a visible subculture. The directory, the federations, PEACH-style mutual aid — the infrastructure on slides 11–12 — already exists at this scale.";
-    if (pct < 3) return "The Israel zone (kibbutzim ≈ 1.9% today): every county has communities; the form is normalized — a known life option with waiting lists. Mutual-aid funds reach actuarial scale; banks build products for it.";
+    if (pct < 3) return "Normalization: every county has communities; the form is a known life option with waiting lists, not an oddity. Mutual-aid funds reach actuarial scale; banks and insurers build products for it.";
     if (pct < 8) return "A housing-market segment: millions of units withdrawn from rental and speculative markets. A political constituency on the scale of organized labor's core — zoning reform stops being a niche ask.";
     if (pct < 15) return "A labor-market alternative: the exit option is real for every worker, disciplining wages and conditions economy-wide (the strike fund that never runs out — slide 6). Regional food and care systems run substantially through the communal sector.";
-    return "A structural counterweight: at 20% (68M people — France-sized), the rent relation, the care market, and atomized consumption are no longer universal defaults. This is the scale the kibbutz sector approached in pre-state Israel — when it shaped the institutions of the entire society.";
+    return "A structural counterweight: at 20% (68M people — France-sized), the rent relation, the care market, and atomized consumption are no longer universal defaults — the communal sector shapes the institutions of the wider society.";
   }
   const slider = document.getElementById('pct');
   function updateSim() {
